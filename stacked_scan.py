@@ -5,91 +5,146 @@ from tomophantom import TomoP3D
 from tomophantom.supp.artifacts import _Artifacts_
 from tomobar.methodsDIR import RecToolsDIR
 from PIL import Image
+from config import *
 
 
-# Select a model number from the library
-model = 13
 
-# Define phantom dimensions using a scalar value
-size = 256
-
-# Number of vertical scans
-scans_num = 4
-
-# Overlay between adjacent scans in slices
-overlay = 8
-
-# Apply noise
-apply_noise = True
-
-# Noise parameters
-noise_params =  {'noise_type' : 'Poisson',
-                'noise_amplitude' : 10000,
-                'noise_seed' : 0}
-
-# Path for saving slices
-folder = "img/Shepp-Logan"
+h_det = int(np.sqrt(2) * size[0]) # detector column count (horizontal)
+v_det = size[0] # detector row count (vertical)
+angles_num = int(0.5 * np.pi * size[0]); # angles number
+angles = np.linspace(0.0, 179.9, angles_num, dtype='float32') # in degrees
+# angles = np.linspace(0, 180, 180, dtype='float32')
+angles_rad = angles * (np.pi / 180.0)
 
 
-partition = []
 
-print('Building partition')
-if scans_num > 1:
-    scan_height = int(size / scans_num)
-    half_overlay = int(overlay / 2)
-    partition.append((0, scan_height + overlay))
-
-    for scan_id in range(1, scans_num - 1):
-        offset = scan_id * scan_height
-        partition.append((offset - half_overlay, offset + scan_height + half_overlay))
-
-    partition.append((size - scan_height - overlay, size))
-
-else:
-    partition.append((0, size))
+def render_model():
+    return TomoP3D.Model(model, size[0], models_lib)
 
 
-path = os.path.dirname(tomophantom.__file__)
-path_library3D = os.path.join(path, "Phantom3DLibrary.dat")
-rec_result = []
+
+def build_projections():
+    return TomoP3D.ModelSino(model, size[0], h_det, v_det, angles, models_lib)
 
 
-if apply_noise:
-    h_det = int(np.sqrt(2) * size) # detector column count (horizontal)
-    v_det = size # detector row count (vertical)
-    angles_num = int(0.5*np.pi * size); # angles number
-    angles = np.linspace(0.0,179.9,angles_num,dtype='float32') # in degrees
-    # angles = np.linspace(0, 180, 180, dtype='float32')
-    angles_rad = angles*(np.pi/180.0)
 
+def split(data):
+    partition = []
+
+    if parts_num > 1:
+        scan_height = int(size[0] / parts_num)
+        half_overlay = int(overlay / 2)
+        partition.append((0, scan_height + overlay))
+
+        for scan_id in range(1, parts_num - 1):
+            offset = scan_id * scan_height
+            partition.append((offset - half_overlay, offset + scan_height + half_overlay))
+
+        partition.append((size[0] - scan_height - overlay, size[0]))
+
+    else:
+        partition.append((0, size[0]))
+
+    splitted_recs = []
+
+    for part in partition:
+        splitted_recs.append(data[part[0]:part[1],:,:])
+
+    return splitted_recs
+
+
+
+def apply_noise(projections_data):
+    for projection in projections_data:
+        projection = _Artifacts_(projection, **noise_params)
+
+    return projections_data
+
+
+
+def reconstruct(projections_data):
+    for projection in projections_data:
+        RectoolsDIR = RecToolsDIR(DetectorsDimH = h_det,
+                                DetectorsDimV = len(projection),
+                                CenterRotOffset = None,
+                                AnglesVec = angles_rad,
+                                ObjSize = len(projection),
+                                device_projector = 'cpu')
+
+        projection = RectoolsDIR.FBP(projection) # FBP reconstruction
+
+    return projections_data
+
+
+
+def shrink_to_size(recs):
+    for rec in recs:
+        ld = int((size[0] - size[1]) / 2)
+        rd = int(size[1] + ld)
+        lw = int((size[0] - size[2]) / 2)
+        rw = int(size[2] + lw)
+        rec = rec[:,ld:rd,lw:rw]
+
+    return recs
+
+
+
+def apply_offset(recs):
+    offsets = np.random.randint(-max_offset, max_offset, (parts_num, 2))
+
+    for id, offset in enumerate(offsets):
+        ld = (size[0] - size[1]) / 2 + offset[0]
+        rd = size[1] + ld + offset[0]
+        lw = (size[0] - size[2]) / 2 + offset[1]
+        rw = size[2] + lw + offset[1]
+        recs[id] = recs[id][:,ld:rd,lw:rw]
+
+    return recs
+
+
+
+def save_reconstructions(recs):
+    os.makedirs(save_path, exist_ok=True)
+
+    for rec_id, rec in enumerate(recs):
+        rec_save_path = save_path + '/' + str(rec_id) + '/'
+        os.mkdir(rec_save_path)
+
+        for slice_id in range(len(rec)):
+            img = Image.fromarray(np.array(rec[slice_id,:,:], dtype='float32'))
+            img.save(rec_save_path + str(slice_id) + '.tiff', format='TIFF')
+
+
+
+
+recs = []
+
+if (is_noisy):
     print('Building 3D analytical projection data')
-    projData3D_analyt= TomoP3D.ModelSino(model, size, h_det, v_det, angles, path_library3D)
+    proj = build_projections()
+
+    print('Building partition')
+    projs = split(proj)
 
     print('Adding noise to projection data')
-    projData3D_analyt_noisy = _Artifacts_(projData3D_analyt, **noise_params)
-    
+    projs = apply_noise(projs)
+
     print('Reconstructing using FBP from tomobar')
-    RectoolsDIR = RecToolsDIR(DetectorsDimH = h_det,
-                            DetectorsDimV = v_det,
-                            CenterRotOffset = None,
-                            AnglesVec = angles_rad,
-                            ObjSize = size,
-                            device_projector = 'cpu')
-
-    rec_result = RectoolsDIR.FBP(projData3D_analyt_noisy) # FBP reconstruction
-
+    recs = reconstruct(projs)
 else:
     print('Generate a size x size x size phantom')
-    rec_result = TomoP3D.Model(model, size, path_library3D)
+    data = render_model()
+
+    print('Building partition')
+    recs = split(data)
 
 
-os.makedirs(folder, exist_ok=True)
+if (is_offset):
+    print('Shifting parts')
+    recs = apply_offset(recs)
+else:
+    print('Shrinking to size')
+    recs = shrink_to_size(recs)
 
-print('Saving scans')
-for part_id, part in enumerate(partition):
-    part_folder = folder + '/' + str(part_id) + '/'
-    os.mkdir(part_folder)
-
-    for slice_id in range(part[0], part[1]):
-        img = Image.fromarray(np.array(rec_result[slice_id,:,:] * 255, dtype=np.int8), mode='L')
-        img.save(part_folder + str(slice_id) + '.tiff', format='TIFF')
+print('Saving reconstructions')
+save_reconstructions(recs)
