@@ -4,6 +4,7 @@
 // }
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 extern "C" {
@@ -14,6 +15,31 @@ extern "C" {
 // #include <astra/FilteredBackProjectionAlgorithm.h>
 
 #include <opencv2/opencv.hpp>
+#include "TomoP3DObject.hpp"
+#include "TomoP3DModel.hpp"
+
+
+void show_demo_animation(int model_no, int N);
+
+
+int main(int argc, char** argv) {
+    // if (argc != 3)
+    // {
+    //     printf("Usage: ./strg size model_id\n");
+    //     return 1;
+    // }
+    // show_demo_animation(atoi(argv[2]), atoi(argv[1]));
+
+    if (argc != 3)
+    {
+        printf("Usage: ./strg models_file model_id\n");
+        return 1;
+    }
+    TomoP3DModel model;
+    model.read_from_file(argv[1], atoi(argv[2]));
+
+    return 0;
+}
 
 
 void show_demo_animation(int model_no, int N) {
@@ -51,17 +77,4 @@ void show_demo_animation(int model_no, int N) {
             angle = 0;
         }
     }
-}
-
-
-int main(int argc, char** argv) {
-    if (argc != 3)
-    {
-        printf("Usage: ./strg size model_id\n");
-        return 1;
-    }
-
-    show_demo_animation(atoi(argv[2]), atoi(argv[1]));
-
-    return 0;
 }
