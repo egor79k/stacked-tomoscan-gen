@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 
 class TomoP3DObject {
@@ -21,6 +22,8 @@ public:
         float psi_gr3_);
 
     TomoP3DObject(const TomoP3DObject&) = default;
+
+    void sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles);
 
     // std::istream& read_from(std::istream& is);
     std::ostream& write_to(std::ostream& os) const noexcept;

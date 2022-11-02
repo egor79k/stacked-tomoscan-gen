@@ -9,7 +9,16 @@
 
 
 TomoP3DModel::TomoP3DModel(char* file_name, const int model_id) {
-    read_from_file(file_name, model_id);
+    if (!read_from_file(file_name, model_id)) {
+        objects.clear();
+    }
+}
+
+
+void TomoP3DModel::sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles) {
+    for (auto object : objects) {
+        object.sinogram(data, horiz_det, vert_det, z1, z2, size, angles);
+    }
 }
 
 
@@ -134,7 +143,6 @@ bool TomoP3DModel::read_from_file(char* file_name, const int model_id) {
             psi_gr2 = (float)atof(tmpstr11); // rotation angle 2
             psi_gr3 = (float)atof(tmpstr12); // rotation angle 3
 
-            // TomoP3DObject_core(A, N1, N2, N3, Z1, Z2, tmpstr2, c0, y0, x0, z0, a, b, c, psi_gr1, psi_gr2, psi_gr3, 0l); /* python */
             objects.emplace_back(tmpstr2, c0, x0, y0, z0, a, b, c, psi_gr1, psi_gr2, psi_gr3);
         }
     }
@@ -151,7 +159,7 @@ std::ostream& TomoP3DModel::write_to(std::ostream& os) const noexcept {
     for (auto object : objects) {
         os << object;
     }
-    
+
     return os;
 }
 

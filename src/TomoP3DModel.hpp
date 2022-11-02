@@ -10,6 +10,9 @@ class TomoP3DModel {
 public:
     TomoP3DModel() = default;
     TomoP3DModel(char* file_name, const int model_id);
+    TomoP3DModel(const TomoP3DModel&) = default;
+
+    void sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles);
 
     bool read_from_file(char* file_name, const int model_id);
     // std::istream& read_from(std::istream& is);
