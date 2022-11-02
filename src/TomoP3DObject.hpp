@@ -2,6 +2,7 @@
 #define TOMO_P_3D_OBJECT_HPP
 
 #include <iostream>
+#include <string>
 
 
 class TomoP3DObject {
@@ -19,11 +20,13 @@ public:
         float psi_gr2_,
         float psi_gr3_);
 
+    TomoP3DObject(const TomoP3DObject&) = default;
+
     // std::istream& read_from(std::istream& is);
     std::ostream& write_to(std::ostream& os) const noexcept;
 
 private:
-    char *object;  // Analytical Model selection
+    std::string object;  // Analytical Model selection
     float c0;      // intensity
     float x0;      // x0 position
     float y0;      // y0 position
@@ -34,7 +37,6 @@ private:
     float psi_gr1; // rotation angle1
     float psi_gr2; // rotation angle2
     float psi_gr3; // rotation angle3
-    // long tt;       // temporal index, 0 - for stationary
 };
 
 

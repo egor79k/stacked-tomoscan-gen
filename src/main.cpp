@@ -35,8 +35,9 @@ int main(int argc, char** argv) {
         printf("Usage: ./strg models_file model_id\n");
         return 1;
     }
-    TomoP3DModel model;
-    model.read_from_file(argv[1], atoi(argv[2]));
+    TomoP3DModel model(argv[1], atoi(argv[2]));
+    // model.read_from_file(argv[1], atoi(argv[2]));
+    std::cout << model;
 
     return 0;
 }
