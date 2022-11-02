@@ -1,10 +1,5 @@
 #include <iostream>
 #include <vector>
-
-extern "C" {
-    #include <tomophantom/TomoP3DModelSino_core.h>
-}
-
 #include <opencv2/opencv.hpp>
 #include "TomoP3DModel.hpp"
 

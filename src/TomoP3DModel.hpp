@@ -9,12 +9,14 @@
 class TomoP3DModel {
 public:
     TomoP3DModel() = default;
-    TomoP3DModel(char* file_name, const int model_id);
+    TomoP3DModel(const char* file_name, const int model_id);
     TomoP3DModel(const TomoP3DModel&) = default;
 
+    void move(float x, float y);
+    void rotate(float ang1, float ang2, float ang3);
     void sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles);
 
-    bool read_from_file(char* file_name, const int model_id);
+    bool read_from_file(const char* file_name, const int model_id);
     // std::istream& read_from(std::istream& is);
     std::ostream& write_to(std::ostream& os) const noexcept;
 

@@ -8,9 +8,23 @@
 #include "TomoP3DModel.hpp"
 
 
-TomoP3DModel::TomoP3DModel(char* file_name, const int model_id) {
+TomoP3DModel::TomoP3DModel(const char* file_name, const int model_id) {
     if (!read_from_file(file_name, model_id)) {
         objects.clear();
+    }
+}
+
+
+void TomoP3DModel::move(float x, float y) {
+    for (auto object : objects) {
+        object.move(x, y);
+    }
+}
+
+
+void TomoP3DModel::rotate(float ang1, float ang2, float ang3) {
+    for (auto object : objects) {
+        object.rotate(ang1, ang2, ang3);
     }
 }
 
@@ -22,7 +36,7 @@ void TomoP3DModel::sinogram(float *data, long horiz_det, long vert_det, long z1,
 }
 
 
-bool TomoP3DModel::read_from_file(char* file_name, const int model_id) {
+bool TomoP3DModel::read_from_file(const char* file_name, const int model_id) {
     const int MAXCHAR = 1000;
 
     int model = 0;

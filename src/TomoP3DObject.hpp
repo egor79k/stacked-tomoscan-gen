@@ -23,6 +23,8 @@ public:
 
     TomoP3DObject(const TomoP3DObject&) = default;
 
+    void move(float x, float y);
+    void rotate(float ang1, float ang2, float ang3);
     void sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles);
 
     // std::istream& read_from(std::istream& is);
