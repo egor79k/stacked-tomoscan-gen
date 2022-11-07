@@ -2,10 +2,10 @@
 # Model parameters
 #----------------------------------------------------------
 # Path to phantoms library
-models_lib = 'CustomPhantom3DLibrary.dat'
+models_lib = 'models/Phantom3DLibrary.dat'
 
 # Select a model number from the library
-model = 1
+model = 13
 
 
 #==========================================================
@@ -41,7 +41,7 @@ type = 'float32'
 seed = 0
 
 # Is need to apply noise
-is_noisy = False
+is_noisy = True
 
 # Noise parameters
 noise_params =  {'noise_type' : 'Poisson',

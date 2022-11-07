@@ -1,51 +1,22 @@
 #include <iostream>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <string>
 #include <opencv2/opencv.hpp>
+#include <astra/FilteredBackProjectionAlgorithm.h>
 #include "Generator.hpp"
 
 
 void Generator::run() {
-    std::vector<std::pair<int, int>> partition;
-    build_partition(partition);
-
-    std::vector<float> angles(param.angles_num);
-
-    for (int i = 0; i < param.angles_num; ++i) {
-        angles[i] = i * param.angles_step;
-    }
-
-    int v_det = param.height;
-    int h_det = param.height;
-
-    model.read_from_file(param.models_lib.data(), param.model);
-
-    for (auto part : partition) {
-        printf("%s %i %s %i\n", "Generating slices from", part.first, "to", part.second);
-
-        int proj_mat_shape[] = {part.second - part.first, param.angles_num, h_det};
-        cv::Mat_<float> projections(3, proj_mat_shape);
-        model.sinogram(reinterpret_cast<float*>(projections.data), h_det, v_det, part.first, part.second, param.height, angles);
-        cv::normalize(projections, projections, 0, 1, cv::NORM_MINMAX);
-
-        int angle = 0;
-        int key = 0;
-
-        cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-
-        while (key != 'q') {
-            cv::Mat_<float> slice(proj_mat_shape[0], proj_mat_shape[2], reinterpret_cast<float*>(projections.data) + proj_mat_shape[2] * proj_mat_shape[0] * angle);
-            cv::imshow("Display Image", slice);
-            key = cv::waitKeyEx(20);
-
-            ++angle;
-            if (angle == param.angles_num) {
-                angle = 0;
-            }
-        }
-    }
+    build_partition();
+    build_angles();
+    build_projections();
+    apply_noise();
+    reconstruct();
 }
 
 
-void Generator::build_partition(std::vector<std::pair<int, int>>& partition) {
+void Generator::build_partition() {
     partition.resize(param.parts_num);
 
     if (param.parts_num > 1) {
@@ -67,8 +38,33 @@ void Generator::build_partition(std::vector<std::pair<int, int>>& partition) {
 }
 
 
-void Generator::apply_offset() {
+void Generator::build_angles() {
+    angles.resize(param.angles_num);
 
+    for (int i = 0; i < param.angles_num; ++i) {
+        angles[i] = i * param.angles_step;
+    }
+}
+
+
+void Generator::build_projections() {
+    int v_det = param.height;
+    int h_det = param.height;
+
+    model.read_from_file(param.models_lib.data(), param.model);
+    projections.resize(partition.size());
+
+    for (int part_id = 0; part_id < partition.size(); ++ part_id) {
+        auto part = partition[part_id];
+        printf("%s %i %s %i\n", "Generating slices from", part.first, "to", part.second);
+
+        // TomoP3DModel transformed_model = model.transformed();
+
+        int proj_mat_shape[] = {part.second - part.first, param.angles_num, h_det};
+        projections[part_id] = cv::Mat_<float>(3, proj_mat_shape);
+        printf("%s %i %i %i\n", "Size:", proj_mat_shape[0], proj_mat_shape[1], proj_mat_shape[2]);
+        model.sinogram(reinterpret_cast<float*>(projections[part_id].data), h_det, v_det, part.first, part.second, param.height, angles);
+    }
 }
 
 
@@ -76,3 +72,36 @@ void Generator::apply_noise() {
 
 }
 
+
+void Generator::reconstruct() {
+    mkdir("temp/", S_IRWXU);
+    for (int part_id = 0; part_id < projections.size(); ++ part_id) {
+        cv::Mat_<float>& part_projs = projections[part_id];
+
+        std::string save_dir("temp/" + std::to_string(part_id) + "/");
+        mkdir(save_dir.data(), S_IRWXU);
+
+        for (int angle_id = 0; angle_id < param.angles_num; ++angle_id) {
+            cv::Mat_<float> slice(part_projs.size[0], part_projs.size[2], reinterpret_cast<float*>(part_projs.data) + part_projs.size[2] * part_projs.size[0] * angle_id);
+            cv::imwrite(save_dir + std::to_string(angle_id) + ".tiff", slice);
+        }
+
+        cv::normalize(part_projs, part_projs, 0, 1, cv::NORM_MINMAX);
+
+        int angle = 0;
+        int key = 0;
+
+        cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
+
+        while (key != 'q') {
+            cv::Mat_<float> slice(part_projs.size[0], part_projs.size[2], reinterpret_cast<float*>(part_projs.data) + part_projs.size[2] * part_projs.size[0] * angle);
+            cv::imshow("Display Image", slice);
+            key = cv::waitKeyEx(20);
+
+            ++angle;
+            if (angle == param.angles_num) {
+                angle = 0;
+            }
+        }
+    }
+}

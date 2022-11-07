@@ -14,12 +14,17 @@ public:
     void run();
 
 private:
-    void build_partition(std::vector<std::pair<int, int>>& partition);
-    void apply_offset();
+    void build_partition();
+    void build_angles();
+    void build_projections();
     void apply_noise();
+    void reconstruct();
 
     Parameters param;
     TomoP3DModel model;
+    std::vector<std::pair<int, int>> partition;
+    std::vector<float> angles;
+    std::vector<cv::Mat_<float>> projections;
 };
 
 

@@ -56,6 +56,7 @@ def split(data):
 
 def apply_noise(projections_data):
     for projection in projections_data:
+        print(len(projection), len(projection[0]), len(projection[0,0]))
         projection = _Artifacts_(projection, **noise_params)
 
     return projections_data
