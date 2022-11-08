@@ -2,12 +2,16 @@
 #define PARAMETERS_HPP
 
 
+#include <algorithm>
+#include <fstream>
+#include <iostream>
 #include <string>
+#include <unordered_map>
 
 
 class Parameters {
 public:
-    // void read_from_file(const char* config_file);
+    bool read_from_file(const char* config_file);
     
     // Model parameters
     std::string models_lib = "../models/Phantom3DLibrary.dat";
@@ -31,12 +35,15 @@ public:
                         // 'noise_amplitude' : 10000,
                         // 'noise_seed' : seed}
     bool is_offset = false;
-    int max_offset = 5;
+    float max_offset = 5;
 
     // Output parameters
     std::string save_path = "img/demo";
-    std::string format = ".tiff";
+    // std::string format = ".tiff";
     // type = 'float32'
+
+private:
+    void serialize(const std::unordered_map<std::string, std::string>& dict);
 };
 
 

@@ -62,7 +62,7 @@ angles_num = int(sys.argv[3])
 angles_step = float(sys.argv[4])
 save_path = sys.argv[5]
 
-angles = np.arange(0, angles_num, angles_step)
+angles = np.arange(0, angles_num * angles_step, angles_step)
 angles_rad = angles * (np.pi / 180.0)
 
 for part_id in range(parts_num):

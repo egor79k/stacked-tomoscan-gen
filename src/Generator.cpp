@@ -8,7 +8,8 @@
 #include "Generator.hpp"
 
 
-void Generator::run() {
+void Generator::run(const char* config_file) {
+    param.read_from_file(config_file);
     build_partition();
     build_angles();
     build_projections();
@@ -70,7 +71,16 @@ void Generator::build_projections() {
 
 
 void Generator::apply_noise() {
+    if (!param.is_noisy) {
+        return;
+    }
 
+    for (cv::Mat_<float>& part_projs : projections) {
+        int noise_size[] = {part_projs.size[0], part_projs.size[1],part_projs.size[2]};
+        cv::Mat_<float> noise(3, noise_size);
+        cv::randn(noise, 6, 1);
+        part_projs += noise;
+    }
 }
 
 

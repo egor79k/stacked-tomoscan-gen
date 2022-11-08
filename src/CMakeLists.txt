@@ -12,6 +12,7 @@ add_executable(strg
             main.cpp
             TomoP3DObject.cpp
             TomoP3DModel.cpp
-            Generator.cpp)
+            Generator.cpp
+            Parameters.cpp)
             
 target_link_libraries(strg ctomophantom astra ${OpenCV_LIBS})

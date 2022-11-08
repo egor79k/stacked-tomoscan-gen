@@ -11,7 +11,7 @@
 class Generator {
 public:
     // Generator(const Parameters& p);
-    void run();
+    void run(const char* config_file);
 
 private:
     void build_partition();

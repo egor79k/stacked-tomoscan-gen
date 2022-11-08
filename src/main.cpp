@@ -10,7 +10,7 @@
 
 int main(int argc, char** argv) {
     Generator g;
-    g.run();
+    g.run("../gen_params.config");
 
     return 0;
 }
