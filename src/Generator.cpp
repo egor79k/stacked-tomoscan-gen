@@ -1,7 +1,8 @@
+#include <cstdlib>
 #include <iostream>
+#include <string>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <string>
 #include <opencv2/opencv.hpp>
 #include <astra/FilteredBackProjectionAlgorithm.h>
 #include "Generator.hpp"
@@ -74,11 +75,11 @@ void Generator::apply_noise() {
 
 
 void Generator::reconstruct() {
-    mkdir("temp/", S_IRWXU);
+    mkdir("projections/", S_IRWXU);
     for (int part_id = 0; part_id < projections.size(); ++ part_id) {
         cv::Mat_<float>& part_projs = projections[part_id];
 
-        std::string save_dir("temp/" + std::to_string(part_id) + "/");
+        std::string save_dir("projections/" + std::to_string(part_id) + "/");
         mkdir(save_dir.data(), S_IRWXU);
 
         for (int angle_id = 0; angle_id < param.angles_num; ++angle_id) {
@@ -86,22 +87,30 @@ void Generator::reconstruct() {
             cv::imwrite(save_dir + std::to_string(angle_id) + ".tiff", slice);
         }
 
-        cv::normalize(part_projs, part_projs, 0, 1, cv::NORM_MINMAX);
+        // cv::normalize(part_projs, part_projs, 0, 1, cv::NORM_MINMAX);
 
-        int angle = 0;
-        int key = 0;
+        // int angle = 0;
+        // int key = 0;
 
-        cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
+        // cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
 
-        while (key != 'q') {
-            cv::Mat_<float> slice(part_projs.size[0], part_projs.size[2], reinterpret_cast<float*>(part_projs.data) + part_projs.size[2] * part_projs.size[0] * angle);
-            cv::imshow("Display Image", slice);
-            key = cv::waitKeyEx(20);
+        // while (key != 'q') {
+        //     cv::Mat_<float> slice(part_projs.size[0], part_projs.size[2], reinterpret_cast<float*>(part_projs.data) + part_projs.size[2] * part_projs.size[0] * angle);
+        //     cv::imshow("Display Image", slice);
+        //     key = cv::waitKeyEx(20);
 
-            ++angle;
-            if (angle == param.angles_num) {
-                angle = 0;
-            }
-        }
+        //     ++angle;
+        //     if (angle == param.angles_num) {
+        //         angle = 0;
+        //     }
+        // }
     }
+
+    std::string cmd = "python3 ../src/reconstructor.py projections " +
+        std::to_string(param.parts_num) + " " +
+        std::to_string(param.angles_num) + " " +
+        std::to_string(param.angles_step) + " " +
+        param.save_path;
+
+    std::system(cmd.data());
 }

@@ -12,7 +12,7 @@ model = 13
 # Partition parameters
 #----------------------------------------------------------
 # Define phantom dimensions using a scalar value
-size = (128, 64, 64)
+size = (128, 128, 128)
 
 # Number of vertical scans
 parts_num = 2
