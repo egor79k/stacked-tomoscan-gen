@@ -8,9 +8,10 @@ from PIL import Image
 '''
 This script reconstructs parts of the whole object from partial projections, using ToMoBAR reconstruction tools
 Input:
-    <read_path> <parts_count> <angles_count> <angles_step> <save_path>
+    <read_path> <obj_size> <parts_count> <angles_count> <angles_step> <save_path>
     where:
         read_path    - path to projections dir
+        obj_size     - size of object used in projections building
         parts_count  - number of dirs (named 0/, 1/, 2/, ...) in read_path
         angles_count - number of projection images (named 0.tiff, 1.tiff, ...) in each part dir
         angles_step  - step between adjacent projections
@@ -37,7 +38,7 @@ def reconstruct(projs):
                             DetectorsDimV = projs.shape[0],
                             CenterRotOffset = None,
                             AnglesVec = angles_rad,
-                            ObjSize = projs.shape[2],
+                            ObjSize = obj_size,
                             device_projector = 'cpu')
 
     return RectoolsDIR.FBP(projs)
@@ -53,14 +54,15 @@ def save_reconstructions(rec, part_id: int):
 
 
 if len(sys.argv) < 6:
-    print('Error: Not enougth args\nUsage: <read_path> <parts_count> <angles_count> <angles_step> <save_path>')
+    print('Error: Not enougth args\nUsage: <read_path> <obj_size> <parts_count> <angles_count> <angles_step> <save_path>')
     sys.exit()
 
 read_path = sys.argv[1]
-parts_num = int(sys.argv[2])
-angles_num = int(sys.argv[3])
-angles_step = float(sys.argv[4])
-save_path = sys.argv[5]
+obj_size = int(sys.argv[2])
+parts_num = int(sys.argv[3])
+angles_num = int(sys.argv[4])
+angles_step = float(sys.argv[5])
+save_path = sys.argv[6]
 
 angles = np.arange(0, angles_num * angles_step, angles_step)
 angles_rad = angles * (np.pi / 180.0)

@@ -1,3 +1,4 @@
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -51,7 +52,8 @@ void Generator::build_angles() {
 
 void Generator::build_projections() {
     int v_det = param.height;
-    int h_det = param.height;
+    int h_det = param.width * std::sqrt(2);
+    printf("%s %i %i\n", "PARAM", h_det, param.height);
 
     model.read_from_file(param.models_lib.data(), param.model);
     projections.resize(partition.size());
@@ -117,6 +119,7 @@ void Generator::reconstruct() {
     }
 
     std::string cmd = "python3 ../src/reconstructor.py projections " +
+        std::to_string(param.height) + " " +
         std::to_string(param.parts_num) + " " +
         std::to_string(param.angles_num) + " " +
         std::to_string(param.angles_step) + " " +
