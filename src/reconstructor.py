@@ -2,8 +2,7 @@ import os
 import sys
 import numpy as np
 from tomobar.methodsDIR import RecToolsDIR
-from PIL import Image
-
+import cv2
 
 '''
 This script reconstructs parts of the whole object from partial projections, using ToMoBAR reconstruction tools
@@ -23,12 +22,11 @@ Output:
 
 def read_projections(part_id: int):
     part_read_path = os.path.join(read_path, str(part_id))
-    with Image.open(os.path.join(part_read_path, str(part_id) + '.tiff')) as img:
-        projs = np.empty((img.size[1], angles_num, img.size[0]), dtype='float32')
+    size = cv2.imread(os.path.join(part_read_path, str(part_id) + '.tiff'), cv2.IMREAD_UNCHANGED).shape
+    projs = np.empty((size[0], angles_num, size[1]), dtype='float32')
 
     for proj_id in range(angles_num):
-        img = Image.open(os.path.join(part_read_path, str(proj_id) + '.tiff'))
-        projs[:, proj_id, :] = np.array(img)
+        projs[:, proj_id, :] = cv2.imread(os.path.join(part_read_path, str(proj_id) + '.tiff'), cv2.IMREAD_UNCHANGED)
 
     return projs
 
@@ -49,8 +47,7 @@ def save_reconstructions(rec, part_id: int):
     os.makedirs(rec_save_path, exist_ok=True)
 
     for slice_id in range(len(rec)):
-        img = Image.fromarray(rec[slice_id,:,:])
-        img.save(os.path.join(rec_save_path, str(slice_id) + '.tiff'), format='TIFF')
+        cv2.imwrite(os.path.join(rec_save_path, str(slice_id) + '.tiff'), rec[slice_id,:,:]);
 
 
 if len(sys.argv) < 6:
