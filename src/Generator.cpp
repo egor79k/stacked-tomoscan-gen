@@ -5,7 +5,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <opencv2/opencv.hpp>
-#include <astra/FilteredBackProjectionAlgorithm.h>
 #include "Generator.hpp"
 
 
