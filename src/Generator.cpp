@@ -4,6 +4,7 @@
 #include <string>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <unistd.h>
 #include <opencv2/opencv.hpp>
 #include "Generator.hpp"
 
@@ -52,7 +53,7 @@ void Generator::build_angles() {
 void Generator::build_projections() {
     int v_det = param.height;
     int h_det = param.width * std::sqrt(2);
-    printf("%s %i %i\n", "PARAM", h_det, param.height);
+    // printf("%s %i %i\n", "PARAM", h_det, param.height);
 
     model.read_from_file(param.models_lib.data(), param.model);
     projections.resize(partition.size());
@@ -86,11 +87,18 @@ void Generator::apply_noise() {
 
 
 void Generator::reconstruct() {
-    mkdir("projections/", S_IRWXU);
+
+    std::string proj_dir = param.save_path + "/projections/";
+
+    std::system(("rm -r " + param.save_path).data());
+
+    mkdir(param.save_path.data(), S_IRWXU);
+    mkdir(proj_dir.data(), S_IRWXU);
+
     for (int part_id = 0; part_id < projections.size(); ++ part_id) {
         cv::Mat_<float>& part_projs = projections[part_id];
 
-        std::string save_dir("projections/" + std::to_string(part_id) + "/");
+        std::string save_dir(proj_dir + std::to_string(part_id) + "/");
         mkdir(save_dir.data(), S_IRWXU);
 
         for (int angle_id = 0; angle_id < param.angles_num; ++angle_id) {
@@ -117,7 +125,8 @@ void Generator::reconstruct() {
         // }
     }
 
-    std::string cmd = "python3 ../src/reconstructor.py projections " +
+    std::string cmd = "python3 ../src/reconstructor.py " +
+        proj_dir + " " +
         std::to_string(param.height) + " " +
         std::to_string(param.parts_num) + " " +
         std::to_string(param.angles_num) + " " +
@@ -125,4 +134,6 @@ void Generator::reconstruct() {
         param.save_path;
 
     std::system(cmd.data());
+
+    // std::system(("rm -r " + proj_dir).data());
 }

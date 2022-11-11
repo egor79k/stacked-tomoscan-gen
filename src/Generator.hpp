@@ -10,7 +10,6 @@
 
 class Generator {
 public:
-    // Generator(const Parameters& p);
     void run(const char* config_file);
 
 private:

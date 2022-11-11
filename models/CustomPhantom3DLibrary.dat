@@ -1,12 +1,13 @@
 #----------------------------------------------------
-# Nested objects
+# Nested cylinders
 Model : 01;
-Components : 2;
+Components : 3;
 TimeSteps : 1;
-Object : ellipsoid 1.0 0.0 0.0 0.3 0.2 0.4 0.5 00 00 00;
-Object : ellipsoid 1.0 0.0 0.0 -0.3 0.4 0.2 0.5 0;
+Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.3 0.3 0.9 0;
+Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.2 0.2 0.9 0;
+Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.1 0.1 0.9 0;
 #----------------------------------------------------
-# 'Cuboid with bubbles'
+# Cuboid with bubbles
 Model : 02;
 Components : 103;
 TimeSteps : 1;
@@ -114,7 +115,7 @@ Object : ellipsoid 0.84 -0.03 -0.37  0.55  0.05  0.03  0.03 0;
 Object : ellipsoid 0.81 -0.28  0.21 -0.36  0.10  0.02  0.08 0;
 Object : ellipsoid 0.51 -0.07  0.03 -0.51  0.02  0.02  0.02 0;
 #----------------------------------------------------
-# 'Bubbles'
+# Bubbles
 Model : 03;
 Components : 50;
 TimeSteps : 1;
