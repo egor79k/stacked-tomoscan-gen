@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import numpy as np
 from tomobar.methodsDIR import RecToolsDIR
 import cv2
@@ -46,8 +47,22 @@ def save_reconstructions(rec, part_id: int):
     rec_save_path = os.path.join(save_path, str(part_id))
     os.makedirs(rec_save_path, exist_ok=True)
 
+    # Write images
     for slice_id in range(len(rec)):
         cv2.imwrite(os.path.join(rec_save_path, str(slice_id) + '.tiff'), rec[slice_id,:,:]);
+
+    # Write parameters
+    params = {
+        'height': len(rec),
+        'depth': len(rec[0]),
+        'width': len(rec[0, 0]),
+        'format': '.tiff',
+        'range_min': float(np.min(rec)),
+        'range_max': float(np.max(rec))
+    }
+
+    with open(os.path.join(rec_save_path, 'info.json'), 'w') as fp:
+        json_params = json.dump(params, fp)
 
 
 if len(sys.argv) < 6:
@@ -71,3 +86,11 @@ for part_id in range(parts_num):
     rec = reconstruct(projs)
     print('- Saving reconstructions')
     save_reconstructions(rec, part_id)
+
+# Write parameters
+params = {
+    'parts_num': parts_num
+}
+
+with open(os.path.join(save_path, 'info.json'), 'w') as fp:
+    json_params = json.dump(params, fp)

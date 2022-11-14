@@ -31,11 +31,12 @@ public:
     // Distortion parameters
     // seed = 0
     bool is_noisy = false;
+    // noise_amplitude = 
     // noise_params =  {'noise_type' : 'Poisson',
                         // 'noise_amplitude' : 10000,
                         // 'noise_seed' : seed}
     bool is_offset = false;
-    float max_offset = 5;
+    float max_offset = 0.2;
 
     // Output parameters
     std::string save_path = "img/demo";

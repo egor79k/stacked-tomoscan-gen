@@ -26,14 +26,14 @@ void Generator::build_partition() {
         int scan_height = param.height / param.parts_num;
         int half_overlay = param.overlay / 2;
         
-        partition[0] = {0, scan_height + param.overlay};
+        partition[0] = {0, scan_height + half_overlay};
 
         for (int scan_id = 1; scan_id < param.parts_num - 1; ++scan_id) {
             int offset = scan_id * scan_height;
             partition[scan_id] = {offset - half_overlay, offset + scan_height + half_overlay};
         }
 
-        partition[param.parts_num - 1] = {param.height - scan_height - param.overlay, param.height};
+        partition[param.parts_num - 1] = {param.height - scan_height - half_overlay, param.height};
     }
     else {
         partition[0] = {0, param.height};
