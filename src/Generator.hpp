@@ -8,8 +8,17 @@
 #include "TomoP3DModel.hpp"
 
 
+/**
+ * \brief Interface class for generation management
+ */
 class Generator {
 public:
+
+    /**
+     * \brief Starts generation pipeline
+     * 
+     * \param[in] config_file Configuration file path
+     */
     void run(const char* config_file);
 
 private:

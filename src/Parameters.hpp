@@ -9,39 +9,48 @@
 #include <unordered_map>
 
 
+/**
+ * \brief Configuration parameters for generator
+ * Configuration file must contain all parameters specified in Public Attributes
+ */
 class Parameters {
 public:
+
+    /**
+     * \brief Read parameters from specified config file
+     * 
+     * \param[in] file_name Configuration file path
+     * \return true - success, false - error
+     */
     bool read_from_file(const char* config_file);
     
     // Model parameters
-    std::string models_lib = "../models/Phantom3DLibrary.dat";
-    int model = 13;
+    std::string models_lib;
+    int model;
 
     // Partition parameters
-    int height = 128;
-    int depth = 128;
-    int width = 128;
-    int parts_num = 2;
-    int overlay = 0;
+    int height;
+    int depth;
+    int width;
+    int parts_num;
+    int overlay;
 
     // Scanning parameters
-    int angles_num = 180;
-    float angles_step = 1.0f;
+    int angles_num;
+    float angles_step;
 
     // Distortion parameters
-    // seed = 0
-    bool is_noisy = false;
-    // noise_amplitude = 
-    // noise_params =  {'noise_type' : 'Poisson',
-                        // 'noise_amplitude' : 10000,
-                        // 'noise_seed' : seed}
-    bool is_offset = false;
-    float max_offset = 0.2;
+    // seed;
+    bool is_noisy;
+    // noise_amplitude;
+    // noise_params;
+    bool is_offset;
+    float max_offset;
 
     // Output parameters
-    std::string save_path = "img/demo";
-    // std::string format = ".tiff";
-    // type = 'float32'
+    std::string save_path;
+    // std::string format;
+    // type;
 
 private:
     void serialize(const std::unordered_map<std::string, std::string>& dict);

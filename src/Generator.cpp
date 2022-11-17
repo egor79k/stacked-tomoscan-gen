@@ -10,7 +10,11 @@
 
 
 void Generator::run(const char* config_file) {
-    param.read_from_file(config_file);
+    if (!param.read_from_file(config_file)) {
+        printf("%s %s", "Error: Unable to read config file", config_file);
+        return;
+    }
+
     build_partition();
     build_angles();
     build_projections();
