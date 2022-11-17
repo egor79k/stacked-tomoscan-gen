@@ -8,10 +8,11 @@ import cv2
 '''
 This script reconstructs parts of the whole object from partial projections, using ToMoBAR reconstruction tools
 Input:
-    <read_path> <obj_size> <parts_count> <angles_count> <angles_step> <save_path>
+    <read_path> <obj_size> <width> <parts_count> <angles_count> <angles_step> <save_path>
     where:
         read_path    - path to projections dir
         obj_size     - size of object used in projections building
+        width        - side size
         parts_count  - number of dirs (named 0/, 1/, 2/, ...) in read_path
         angles_count - number of projection images (named 0.tiff, 1.tiff, ...) in each part dir
         angles_step  - step between adjacent projections
@@ -40,7 +41,10 @@ def reconstruct(projs):
                             ObjSize = obj_size,
                             device_projector = 'cpu')
 
-    return RectoolsDIR.FBP(projs)
+    lw = int((obj_size - width) / 2)
+    rw = int(obj_size - lw)
+    
+    return RectoolsDIR.FBP(projs)[:, lw:rw, lw:rw]
 
 
 def save_reconstructions(rec, part_id: int):
@@ -65,16 +69,17 @@ def save_reconstructions(rec, part_id: int):
         json_params = json.dump(params, fp)
 
 
-if len(sys.argv) < 6:
+if len(sys.argv) < 8:
     print('Error: Not enougth args\nUsage: <read_path> <obj_size> <parts_count> <angles_count> <angles_step> <save_path>')
     sys.exit()
 
 read_path = sys.argv[1]
 obj_size = int(sys.argv[2])
-parts_num = int(sys.argv[3])
-angles_num = int(sys.argv[4])
-angles_step = float(sys.argv[5])
-save_path = sys.argv[6]
+width = int(sys.argv[3])
+parts_num = int(sys.argv[4])
+angles_num = int(sys.argv[5])
+angles_step = float(sys.argv[6])
+save_path = sys.argv[7]
 
 angles = np.arange(0, angles_num * angles_step, angles_step)
 angles_rad = angles * (np.pi / 180.0)
@@ -82,7 +87,7 @@ angles_rad = angles * (np.pi / 180.0)
 for part_id in range(parts_num):
     print('Part ', part_id, '\n- Reading projections')
     projs = read_projections(part_id)
-    print('- Reconstructing')
+    print('- Reconstructing ', projs.shape)
     rec = reconstruct(projs)
     print('- Saving reconstructions')
     save_reconstructions(rec, part_id)

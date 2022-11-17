@@ -57,7 +57,6 @@ void Generator::build_angles() {
 void Generator::build_projections() {
     int v_det = param.height;
     int h_det = param.width * std::sqrt(2);
-    // printf("%s %i %i\n", "PARAM", h_det, param.height);
 
     model.read_from_file(param.models_lib.data(), param.model);
     projections.resize(partition.size());
@@ -81,8 +80,10 @@ void Generator::apply_noise() {
         return;
     }
 
+    printf("Applying noise\n");
+
     for (cv::Mat_<float>& part_projs : projections) {
-        int noise_size[] = {part_projs.size[0], part_projs.size[1],part_projs.size[2]};
+        int noise_size[] = {part_projs.size[0], part_projs.size[1], part_projs.size[2]};
         cv::Mat_<float> noise(3, noise_size);
         cv::randn(noise, 6, 1);
         part_projs += noise;
@@ -109,29 +110,12 @@ void Generator::reconstruct() {
             cv::Mat_<float> slice(part_projs.size[0], part_projs.size[2], reinterpret_cast<float*>(part_projs.data) + part_projs.size[2] * part_projs.size[0] * angle_id);
             cv::imwrite(save_dir + std::to_string(angle_id) + ".tiff", slice);
         }
-
-        // cv::normalize(part_projs, part_projs, 0, 1, cv::NORM_MINMAX);
-
-        // int angle = 0;
-        // int key = 0;
-
-        // cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-
-        // while (key != 'q') {
-        //     cv::Mat_<float> slice(part_projs.size[0], part_projs.size[2], reinterpret_cast<float*>(part_projs.data) + part_projs.size[2] * part_projs.size[0] * angle);
-        //     cv::imshow("Display Image", slice);
-        //     key = cv::waitKeyEx(20);
-
-        //     ++angle;
-        //     if (angle == param.angles_num) {
-        //         angle = 0;
-        //     }
-        // }
     }
 
     std::string cmd = "python3 ../src/reconstructor.py " +
         proj_dir + " " +
         std::to_string(param.height) + " " +
+        std::to_string(param.width) + " " +
         std::to_string(param.parts_num) + " " +
         std::to_string(param.angles_num) + " " +
         std::to_string(param.angles_step) + " " +

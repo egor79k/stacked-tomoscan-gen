@@ -1,14 +1,56 @@
 #----------------------------------------------------
 # Nested cylinders
 Model : 01;
-Components : 3;
+Components : 39;
 TimeSteps : 1;
-Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.3 0.3 0.9 0;
-Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.2 0.2 0.9 0;
-Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.1 0.1 0.9 0;
+Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.4  0.4  0.9 0;
+Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.35 0.35 0.9 0;
+Object : elliptical_cylinder 1.0 0.0 0.0 0.0 0.3  0.3  0.9 0;
+Object : ellipsoid 1.0 0.0 0.0  0.3 0.2  0.29 0.5 0;
+Object : ellipsoid 1.0 0.0 0.0 -0.3 0.29 0.2  0.5 0;
+Object : gaussian 1.0 0.0 0.0  0.3 0.1 0.1 0.1 0;
+Object : gaussian 1.0 0.0 0.0 -0.3 0.1 0.1 0.1 0;
+Object : ellipsoid 1.0  0.270  0.000 -0.700 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.264 -0.056 -0.700 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.247  0.110 -0.607 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.218 -0.159 -0.607 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.181  0.201 -0.513 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.135 -0.234 -0.513 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.083  0.257 -0.420 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.028 -0.269 -0.420 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.028  0.269 -0.327 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.083 -0.257 -0.327 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.135  0.234 -0.233 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.181 -0.201 -0.233 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.218  0.159 -0.140 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.247 -0.110 -0.140 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.264  0.056 -0.047 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.270 -0.000 -0.047 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.264 -0.056  0.047 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.270  0.000  0.047 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.218 -0.159  0.140 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.247  0.110  0.140 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.135 -0.234  0.233 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.181  0.201  0.233 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.028 -0.269  0.327 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.083  0.257  0.327 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.083 -0.257  0.420 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.028  0.269  0.420 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.181 -0.201  0.513 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.135  0.234  0.513 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.247 -0.110  0.607 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.218  0.159  0.607 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0  0.270 -0.000  0.700 0.05 0.05 0.15 0;
+Object : ellipsoid 1.0 -0.264  0.056  0.700 0.05 0.05 0.15 0;
+#----------------------------------------------------
+Model : 02;
+Components : 2;
+TimeSteps : 1;
+Object : paraboloid 1.0 0.0 0.0 0.4 0.4 0.5 0.5 0;
+Object : gaussian 1.0 0.0 0.0 -0.4 0.5 0.4 0.5 0;
 #----------------------------------------------------
 # Cuboid with bubbles
-Model : 02;
+Model : 03;
 Components : 103;
 TimeSteps : 1;
 Object : cuboid 1.0 0.0 0.0 0.0 1.0 1.0 1.9 0;
@@ -116,7 +158,7 @@ Object : ellipsoid 0.81 -0.28  0.21 -0.36  0.10  0.02  0.08 0;
 Object : ellipsoid 0.51 -0.07  0.03 -0.51  0.02  0.02  0.02 0;
 #----------------------------------------------------
 # Bubbles
-Model : 03;
+Model : 04;
 Components : 50;
 TimeSteps : 1;
 Object : ellipsoid 1.0  0.73 -0.20  0.24 0.10 0.08 0.07 0.0 0.0 0.0;
