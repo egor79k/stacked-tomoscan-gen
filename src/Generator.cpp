@@ -112,7 +112,11 @@ void Generator::reconstruct() {
 
     std::system(("rm -r " + param.save_path).data());
 
-    mkdir(param.save_path.data(), S_IRWXU);
+    if (mkdir(param.save_path.data(), S_IRWXU) == -1) {
+        printf("%s %s\n", "Unable to create directory", param.save_path.data());
+        return;
+    }
+    
     mkdir(proj_dir.data(), S_IRWXU);
 
     printf("%s %s\n", "Writing projections to", proj_dir.data());
