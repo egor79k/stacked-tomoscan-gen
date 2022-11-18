@@ -16,21 +16,21 @@ TomoP3DModel::TomoP3DModel(const char* file_name, const int model_id) {
 
 
 void TomoP3DModel::move(float x, float y) {
-    for (auto object : objects) {
+    for (TomoP3DObject& object : objects) {
         object.move(x, y);
     }
 }
 
 
 void TomoP3DModel::rotate(float ang1, float ang2, float ang3) {
-    for (auto object : objects) {
+    for (TomoP3DObject& object : objects) {
         object.rotate(ang1, ang2, ang3);
     }
 }
 
 
 void TomoP3DModel::sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles) {
-    for (auto object : objects) {
+    for (TomoP3DObject& object : objects) {
         object.sinogram(data, horiz_det, vert_det, z1, z2, size, angles);
     }
 }

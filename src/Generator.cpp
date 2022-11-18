@@ -24,6 +24,7 @@ void Generator::run(const char* config_file) {
 
 
 void Generator::build_partition() {
+    printf("%s %i %s %i %s %i\n", "Building partition of height", param.height, "into", param.parts_num, "parts with overlay", param.overlay);
     partition.resize(param.parts_num);
 
     if (param.parts_num > 1) {
@@ -54,23 +55,38 @@ void Generator::build_angles() {
 }
 
 
+void Generator::build_offsets() {
+    offsets = cv::Mat_<float>(partition.size(), 2);
+    cv::randu(offsets, -param.max_offset, param.max_offset);
+}
+
+
 void Generator::build_projections() {
     int v_det = param.height;
     int h_det = param.width * std::sqrt(2);
 
+    printf("%s %i %s %s\n", "Reading model", param.model, "from", param.models_lib.data());
     model.read_from_file(param.models_lib.data(), param.model);
     projections.resize(partition.size());
 
+    if (param.is_offset) {
+        build_offsets();
+    }
+
     for (int part_id = 0; part_id < partition.size(); ++ part_id) {
         auto part = partition[part_id];
-        printf("%s %i %s %i\n", "Generating slices from", part.first, "to", part.second);
-
-        // TomoP3DModel transformed_model = model.transformed();
-
         int proj_mat_shape[] = {part.second - part.first, param.angles_num, h_det};
+
+        printf("%s %i %s %i %s %i %i %i\n", "Building sinograms from", part.first, "to", part.second, "with shape", proj_mat_shape[0], proj_mat_shape[1], proj_mat_shape[2]);
+        TomoP3DModel curr_model = model;
+
+        if (param.is_offset) {
+            printf("%s (%f, %f)\n", "Applying offset on", offsets[part_id][0], offsets[part_id][1]);
+            curr_model.move(offsets[part_id][0], offsets[part_id][1]);
+        }
+
         projections[part_id] = cv::Mat_<float>(3, proj_mat_shape);
-        printf("%s %i %i %i\n", "Size:", proj_mat_shape[0], proj_mat_shape[1], proj_mat_shape[2]);
-        model.sinogram(reinterpret_cast<float*>(projections[part_id].data), h_det, v_det, part.first, part.second, param.height, angles);
+        curr_model.sinogram(reinterpret_cast<float*>(projections[part_id].data), h_det, v_det, part.first, part.second, param.height, angles);
     }
 }
 
@@ -92,7 +108,6 @@ void Generator::apply_noise() {
 
 
 void Generator::reconstruct() {
-
     std::string proj_dir = param.save_path + "/projections/";
 
     std::system(("rm -r " + param.save_path).data());
@@ -100,6 +115,7 @@ void Generator::reconstruct() {
     mkdir(param.save_path.data(), S_IRWXU);
     mkdir(proj_dir.data(), S_IRWXU);
 
+    printf("%s %s\n", "Writing projections to", proj_dir.data());
     for (int part_id = 0; part_id < projections.size(); ++ part_id) {
         cv::Mat_<float>& part_projs = projections[part_id];
 
@@ -121,6 +137,7 @@ void Generator::reconstruct() {
         std::to_string(param.angles_step) + " " +
         param.save_path;
 
+    printf("Running reconstruction script\n");
     std::system(cmd.data());
 
     // std::system(("rm -r " + proj_dir).data());

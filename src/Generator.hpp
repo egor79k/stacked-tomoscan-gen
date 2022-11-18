@@ -24,6 +24,7 @@ public:
 private:
     void build_partition();
     void build_angles();
+    void build_offsets();
     void build_projections();
     void apply_noise();
     void reconstruct();
@@ -32,6 +33,7 @@ private:
     TomoP3DModel model;
     std::vector<std::pair<int, int>> partition;
     std::vector<float> angles;
+    cv::Mat_<float> offsets;
     std::vector<cv::Mat_<float>> projections;
 };
 
