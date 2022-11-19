@@ -54,6 +54,8 @@ public:
 
 private:
     void serialize(const std::unordered_map<std::string, std::string>& dict);
+
+    std::string config_dir;
 };
 
 

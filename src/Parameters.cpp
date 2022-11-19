@@ -24,6 +24,9 @@ bool Parameters::read_from_file(const char* config_file) {
         dict.insert({name, value});
     }
 
+    std::string cf(config_file);
+    config_dir = cf.substr(0, cf.find_last_of('/') + 1);
+
     serialize(dict);
         
     return true;
@@ -32,7 +35,7 @@ bool Parameters::read_from_file(const char* config_file) {
 
 void Parameters::serialize(const std::unordered_map<std::string, std::string>& dict) {
     // Model parameters
-    models_lib = dict.at("models_lib");
+    models_lib = config_dir + dict.at("models_lib");
     model = std::stoi(dict.at("model"));
 
     // Partition parameters
@@ -52,5 +55,5 @@ void Parameters::serialize(const std::unordered_map<std::string, std::string>& d
     max_offset = std::stof(dict.at("max_offset"));
 
     // Output parameters
-    save_path = dict.at("save_path");
+    save_path = config_dir + dict.at("save_path");
 }
