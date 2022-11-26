@@ -91,9 +91,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7105e6d2880fcc0b51fa902454161028"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#a7105e6d2880fcc0b51fa902454161028">move</a> (float x, float y)</td></tr>
 <tr class="memdesc:a7105e6d2880fcc0b51fa902454161028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves model on given offset Change each object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0)  <a href="classTomoP3DModel.html#a7105e6d2880fcc0b51fa902454161028">More...</a><br /></td></tr>
 <tr class="separator:a7105e6d2880fcc0b51fa902454161028"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7080c9e10e6733d6000839fa1a8f0c9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#a7080c9e10e6733d6000839fa1a8f0c9c">rotate</a> (float ang1, float ang2, float ang3)</td></tr>
-<tr class="memdesc:a7080c9e10e6733d6000839fa1a8f0c9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates model on given angles Change each object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3)  <a href="classTomoP3DModel.html#a7080c9e10e6733d6000839fa1a8f0c9c">More...</a><br /></td></tr>
-<tr class="separator:a7080c9e10e6733d6000839fa1a8f0c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f163af4e50a292aa3107fb63bab1b5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#a0f163af4e50a292aa3107fb63bab1b5e">rotate</a> (float ang_x, float ang_y, float ang_z, float cor_x, float cor_y, float cor_z)</td></tr>
+<tr class="memdesc:a0f163af4e50a292aa3107fb63bab1b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates model on given angles Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles.  <a href="classTomoP3DModel.html#a0f163af4e50a292aa3107fb63bab1b5e">More...</a><br /></td></tr>
+<tr class="separator:a0f163af4e50a292aa3107fb63bab1b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af44d52fe0890a173107b7467ce7aa371"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#af44d52fe0890a173107b7467ce7aa371">sinogram</a> (float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector&lt; float &gt; &amp;angles)</td></tr>
 <tr class="memdesc:af44d52fe0890a173107b7467ce7aa371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds model projections Registrates projections of model part from z1 to z2 from specified angles and writes it to data sequentially.  <a href="classTomoP3DModel.html#af44d52fe0890a173107b7467ce7aa371">More...</a><br /></td></tr>
 <tr class="separator:af44d52fe0890a173107b7467ce7aa371"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,8 +220,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7080c9e10e6733d6000839fa1a8f0c9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7080c9e10e6733d6000839fa1a8f0c9c">&#9670;&nbsp;</a></span>rotate()</h2>
+<a id="a0f163af4e50a292aa3107fb63bab1b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f163af4e50a292aa3107fb63bab1b5e">&#9670;&nbsp;</a></span>rotate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,19 +230,37 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void TomoP3DModel::rotate </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>ang1</em>, </td>
+          <td class="paramname"><em>ang_x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>ang2</em>, </td>
+          <td class="paramname"><em>ang_y</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>ang3</em>&#160;</td>
+          <td class="paramname"><em>ang_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cor_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cor_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cor_z</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -252,11 +270,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Rotates model on given angles Change each object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3) </p>
+<p>Rotates model on given angles Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>X offset (in degrees) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Y offset (in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ang_x</td><td>X rotation (in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ang_y</td><td>Y rotation (in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ang_z</td><td>Z rotation (in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cor_x</td><td>X center of rotation point (in [-1, 1]) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cor_y</td><td>Y center of rotation point (in [-1, 1]) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cor_z</td><td>Z center of rotation point (in [-1, 1]) </td></tr>
   </table>
   </dd>
 </dl>

@@ -29,16 +29,26 @@ TomoP3DObject::TomoP3DObject(char *object_,
     psi_gr3(psi_gr3_) {}
 
 
-void TomoP3DObject::move(float x, float y) {
+void TomoP3DObject::move(float x, float y, float z) {
     x0 += x;
     y0 += y;
+    z0 += z;
 }
 
 
-void TomoP3DObject::rotate(float ang1, float ang2, float ang3) {
-    psi_gr1 += ang1;
-    psi_gr2 += ang2;
-    psi_gr3 += ang3;
+void TomoP3DObject::transform(cv::Mat T) {
+    cv::Mat_<float> pos = (cv::Mat_<float>(3, 1) << x0, y0, z0);
+    pos = T * pos;
+    x0 = pos(0, 0);
+    y0 = pos(1, 0);
+    z0 = pos(2, 0);
+}
+
+
+void TomoP3DObject::rotate(float ang_x, float ang_y, float ang_z) {
+    psi_gr1 += ang_x;
+    psi_gr2 += ang_y;
+    psi_gr3 += ang_z;
 }
 
 

@@ -44,10 +44,11 @@ Object : ellipsoid 1.0  0.270 -0.000  0.700 0.05 0.05 0.15 0;
 Object : ellipsoid 1.0 -0.264  0.056  0.700 0.05 0.05 0.15 0;
 #----------------------------------------------------
 Model : 02;
-Components : 2;
+Components : 3;
 TimeSteps : 1;
-Object : paraboloid 1.0 0.0 0.0 0.4 0.4 0.5 0.5 0;
-Object : gaussian 1.0 0.0 0.0 -0.4 0.5 0.4 0.5 0;
+Object : ellipsoid 1.0 0.0 0.0  0.4 0.3 0.3 0.5 0;
+Object : ellipsoid 1.0 0.0 0.0  0.0 0.3 0.3 0.5 0;
+Object : ellipsoid 1.0 0.0 0.0 -0.4 0.3 0.3 0.5 0;
 #----------------------------------------------------
 # Cuboid with bubbles
 Model : 03;

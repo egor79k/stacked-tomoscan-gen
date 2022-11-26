@@ -50,9 +50,12 @@ void Parameters::serialize(const std::unordered_map<std::string, std::string>& d
     angles_step = std::stof(dict.at("angles_step"));
 
     // Distortion parameters
+    seed = std::stoi(dict.at("seed"));
     is_noisy = (dict.at("is_noisy") == "1");
     is_offset = (dict.at("is_offset") == "1");
     max_offset = std::stof(dict.at("max_offset"));
+    is_tilted = (dict.at("is_tilted") == "1");
+    max_tilt = std::stof(dict.at("max_tilt"));
 
     // Output parameters
     save_path = config_dir + dict.at("save_path");

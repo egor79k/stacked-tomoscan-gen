@@ -88,22 +88,26 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> build_partition();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> build_angles();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> build_projections();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> apply_noise();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> reconstruct();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classParameters.html">Parameters</a> param;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classTomoP3DModel.html">TomoP3DModel</a> model;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::vector&lt;std::pair&lt;int, int&gt;&gt; partition;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::vector&lt;float&gt; angles;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;cv::Mat_&lt;float&gt;&gt; projections;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif // GENERATOR_HPP</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> build_offsets();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> build_tilts();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> build_projections();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> apply_noise();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> reconstruct();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classParameters.html">Parameters</a> param;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classTomoP3DModel.html">TomoP3DModel</a> model;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;std::pair&lt;int, int&gt;&gt; partition;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    std::vector&lt;float&gt; angles;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    cv::Mat_&lt;float&gt; offsets;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    cv::Mat_&lt;float&gt; tilts;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    std::vector&lt;cv::Mat_&lt;float&gt;&gt; projections;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif // GENERATOR_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassParameters_html"><div class="ttname"><a href="classParameters.html">Parameters</a></div><div class="ttdoc">Configuration parameters for generator Configuration file must contain all parameters specified in Pu...</div><div class="ttdef"><b>Definition:</b> Parameters.hpp:16</div></div>
-<div class="ttc" id="aclassTomoP3DModel_html"><div class="ttname"><a href="classTomoP3DModel.html">TomoP3DModel</a></div><div class="ttdoc">Representation of 3D model TomoP3DModel represents phantom model as a set of TomoP3DObject.</div><div class="ttdef"><b>Definition:</b> TomoP3DModel.hpp:13</div></div>
+<div class="ttc" id="aclassTomoP3DModel_html"><div class="ttname"><a href="classTomoP3DModel.html">TomoP3DModel</a></div><div class="ttdoc">Representation of 3D model TomoP3DModel represents phantom model as a set of TomoP3DObject.</div><div class="ttdef"><b>Definition:</b> TomoP3DModel.hpp:14</div></div>
 <div class="ttc" id="aclassGenerator_html"><div class="ttname"><a href="classGenerator.html">Generator</a></div><div class="ttdoc">Interface class for generation management.</div><div class="ttdef"><b>Definition:</b> Generator.hpp:14</div></div>
 <div class="ttc" id="aclassGenerator_html_a8c68fa3a015713ebb7b4a656c77928d6"><div class="ttname"><a href="classGenerator.html#a8c68fa3a015713ebb7b4a656c77928d6">Generator::run</a></div><div class="ttdeci">void run(const char *config_file)</div><div class="ttdoc">Starts generation pipeline.</div><div class="ttdef"><b>Definition:</b> Generator.cpp:12</div></div>
 <!-- start footer part -->

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <opencv2/opencv.hpp>
 
 
 /**
@@ -70,17 +71,27 @@ public:
      * 
      * \param[in] x X offset (in [-1, 1])
      * \param[in] y Y offset (in [-1, 1])
+     * \param[in] z Z offset (in [-1, 1])
      */
-    void move(float x, float y);
+    void move(float x, float y, float z);
+
+    /**
+     * \brief Transforms object position using given matrix
+     * Change object position vector from (x, y, z) to T * (x, y, z)^T
+     * 
+     * \param[in] T transformation matrix
+     */
+    void transform(cv::Mat T);
 
     /**
      * \brief Rotates object on given angles
      * Change object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3)
      * 
-     * \param[in] x X offset (in degrees)
-     * \param[in] y Y offset (in degrees)
+     * \param[in] ang_x X rotation (in degrees)
+     * \param[in] ang_y Y rotation (in degrees)
+     * \param[in] ang_z Z rotation (in degrees)
      */
-    void rotate(float ang1, float ang2, float ang3);
+    void rotate(float ang_x, float ang_y, float ang_z);
 
     /**
      * \brief Builds object projections

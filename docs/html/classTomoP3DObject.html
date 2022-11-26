@@ -88,12 +88,15 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DObject.html#a9a858d0b633319fe4f6b398b2ab07b85">TomoP3DObject</a> (const <a class="el" href="classTomoP3DObject.html">TomoP3DObject</a> &amp;)=default</td></tr>
 <tr class="memdesc:a9a858d0b633319fe4f6b398b2ab07b85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a copy of the given object. <br /></td></tr>
 <tr class="separator:a9a858d0b633319fe4f6b398b2ab07b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3d73f39c6c67cacfbcb2237100512c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DObject.html#ab3d73f39c6c67cacfbcb2237100512c8">move</a> (float x, float y)</td></tr>
-<tr class="memdesc:ab3d73f39c6c67cacfbcb2237100512c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves object on given offset Change object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0)  <a href="classTomoP3DObject.html#ab3d73f39c6c67cacfbcb2237100512c8">More...</a><br /></td></tr>
-<tr class="separator:ab3d73f39c6c67cacfbcb2237100512c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa23db883a15f5b3a5fd17e8e7fd82fcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DObject.html#aa23db883a15f5b3a5fd17e8e7fd82fcc">rotate</a> (float ang1, float ang2, float ang3)</td></tr>
-<tr class="memdesc:aa23db883a15f5b3a5fd17e8e7fd82fcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates object on given angles Change object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3)  <a href="classTomoP3DObject.html#aa23db883a15f5b3a5fd17e8e7fd82fcc">More...</a><br /></td></tr>
-<tr class="separator:aa23db883a15f5b3a5fd17e8e7fd82fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24cf0217d99cde033b3e4b60d5fe8a8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DObject.html#a24cf0217d99cde033b3e4b60d5fe8a8e">move</a> (float x, float y, float z)</td></tr>
+<tr class="memdesc:a24cf0217d99cde033b3e4b60d5fe8a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves object on given offset Change object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0)  <a href="classTomoP3DObject.html#a24cf0217d99cde033b3e4b60d5fe8a8e">More...</a><br /></td></tr>
+<tr class="separator:a24cf0217d99cde033b3e4b60d5fe8a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DObject.html#a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5">transform</a> (cv::Mat T)</td></tr>
+<tr class="memdesc:a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms object position using given matrix Change object position vector from (x, y, z) to T * (x, y, z)^T.  <a href="classTomoP3DObject.html#a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5">More...</a><br /></td></tr>
+<tr class="separator:a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98a3a159aac7881a9d7cbdfb1ad82f3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DObject.html#a98a3a159aac7881a9d7cbdfb1ad82f3b">rotate</a> (float ang_x, float ang_y, float ang_z)</td></tr>
+<tr class="memdesc:a98a3a159aac7881a9d7cbdfb1ad82f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates object on given angles Change object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3)  <a href="classTomoP3DObject.html#a98a3a159aac7881a9d7cbdfb1ad82f3b">More...</a><br /></td></tr>
+<tr class="separator:a98a3a159aac7881a9d7cbdfb1ad82f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20a3dd657350c2a385c8c31922b6474a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DObject.html#a20a3dd657350c2a385c8c31922b6474a">sinogram</a> (float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector&lt; float &gt; &amp;angles)</td></tr>
 <tr class="memdesc:a20a3dd657350c2a385c8c31922b6474a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds object projections Registrates projections of object part from z1 to z2 from specified angles and writes it to data sequentially.  <a href="classTomoP3DObject.html#a20a3dd657350c2a385c8c31922b6474a">More...</a><br /></td></tr>
 <tr class="separator:a20a3dd657350c2a385c8c31922b6474a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,8 +223,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab3d73f39c6c67cacfbcb2237100512c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3d73f39c6c67cacfbcb2237100512c8">&#9670;&nbsp;</a></span>move()</h2>
+<a id="a24cf0217d99cde033b3e4b60d5fe8a8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24cf0217d99cde033b3e4b60d5fe8a8e">&#9670;&nbsp;</a></span>move()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,7 +239,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -251,14 +260,15 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>X offset (in [-1, 1]) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Y offset (in [-1, 1]) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>Z offset (in [-1, 1]) </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="aa23db883a15f5b3a5fd17e8e7fd82fcc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa23db883a15f5b3a5fd17e8e7fd82fcc">&#9670;&nbsp;</a></span>rotate()</h2>
+<a id="a98a3a159aac7881a9d7cbdfb1ad82f3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98a3a159aac7881a9d7cbdfb1ad82f3b">&#9670;&nbsp;</a></span>rotate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -267,19 +277,19 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void TomoP3DObject::rotate </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>ang1</em>, </td>
+          <td class="paramname"><em>ang_x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>ang2</em>, </td>
+          <td class="paramname"><em>ang_y</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>ang3</em>&#160;</td>
+          <td class="paramname"><em>ang_z</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -292,8 +302,9 @@ Public Member Functions</h2></td></tr>
 <p>Rotates object on given angles Change object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>X offset (in degrees) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Y offset (in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ang_x</td><td>X rotation (in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ang_y</td><td>Y rotation (in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ang_z</td><td>Z rotation (in degrees) </td></tr>
   </table>
   </dd>
 </dl>
@@ -366,6 +377,32 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">z2</td><td>Upper bound of scanning </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Object size </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angles</td><td>Vector of angles of registration of projections </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5">&#9670;&nbsp;</a></span>transform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TomoP3DObject::transform </td>
+          <td>(</td>
+          <td class="paramtype">cv::Mat&#160;</td>
+          <td class="paramname"><em>T</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Transforms object position using given matrix Change object position vector from (x, y, z) to T * (x, y, z)^T. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">T</td><td>transformation matrix </td></tr>
   </table>
   </dd>
 </dl>

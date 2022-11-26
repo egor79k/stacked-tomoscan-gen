@@ -40,12 +40,13 @@ public:
     float angles_step;
 
     // Distortion parameters
-    // seed;
+    int seed;
     bool is_noisy;
     // noise_amplitude;
-    // noise_params;
     bool is_offset;
     float max_offset;
+    bool is_tilted;
+    float max_tilt;
 
     // Output parameters
     std::string save_path;

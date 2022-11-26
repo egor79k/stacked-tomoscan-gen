@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <memory.h>
 #include <stdio.h>
@@ -17,14 +17,48 @@ TomoP3DModel::TomoP3DModel(const char* file_name, const int model_id) {
 
 void TomoP3DModel::move(float x, float y) {
     for (TomoP3DObject& object : objects) {
-        object.move(x, y);
+        object.move(x, y, 0);
     }
 }
 
 
-void TomoP3DModel::rotate(float ang1, float ang2, float ang3) {
+void TomoP3DModel::rotate(float ang_x, float ang_y, float ang_z, float cor_x, float cor_y, float cor_z) {
+    // Angles in radians
+    const double rad_ang = std::acos(-1) / 180;
+    const float rad_x = ang_x * rad_ang;
+    const float rad_y = ang_y * rad_ang;
+    const float rad_z = ang_z * rad_ang;
+
+    // X rotation matrix
+    cv::Mat Rx = (cv::Mat_<float>(3, 3) <<
+        1, 0,               0,
+        0, std::cos(rad_x), -std::sin(rad_x),
+        0, std::sin(rad_x), std::cos(rad_x));
+
+    // Y rotation matrix
+    cv::Mat Ry = (cv::Mat_<float>(3, 3) <<
+        std::cos(rad_y),  0, std::sin(rad_y),
+        0,                1, 0,
+        -std::sin(rad_y), 0, std::cos(rad_y));
+    
+    // Z rotation matrix
+    cv::Mat Rz = (cv::Mat_<float>(3, 3) <<
+        std::cos(rad_z), -std::sin(rad_z), 0,
+        std::sin(rad_z), std::cos(rad_z),  0,
+        0,               0,                1);
+    
+    // Full rotation matrix
+    cv::Mat R = Rz * Ry * Rx;
+
     for (TomoP3DObject& object : objects) {
-        object.rotate(ang1, ang2, ang3);
+        // Move object to the center of rotation
+        object.move(-cor_x, -cor_y, -cor_z);
+        // Transform object position according to rotation
+        object.transform(R);
+        // Move object to it's new origin
+        object.move(cor_x, cor_y, cor_z);
+        // Rotate object on given angles
+        object.rotate(-ang_z, -ang_y, -ang_x);
     }
 }
 

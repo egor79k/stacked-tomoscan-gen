@@ -15,6 +15,8 @@ void Generator::run(const char* config_file) {
         return;
     }
 
+    cv::theRNG().state = param.seed;
+
     build_partition();
     build_angles();
     build_projections();
@@ -61,6 +63,12 @@ void Generator::build_offsets() {
 }
 
 
+void Generator::build_tilts() {
+    tilts = cv::Mat_<float>(partition.size(), 2);
+    cv::randu(tilts, -param.max_tilt, param.max_tilt);
+}
+
+
 void Generator::build_projections() {
     int v_det = param.height;
     int h_det = param.width * std::sqrt(2);
@@ -73,6 +81,10 @@ void Generator::build_projections() {
         build_offsets();
     }
 
+    if (param.is_tilted) {
+        build_tilts();
+    }
+
     for (int part_id = 0; part_id < partition.size(); ++ part_id) {
         auto part = partition[part_id];
         int proj_mat_shape[] = {part.second - part.first, param.angles_num, h_det};
@@ -83,6 +95,21 @@ void Generator::build_projections() {
         if (param.is_offset) {
             printf("%s (%f, %f)\n", "Applying offset on", offsets[part_id][0], offsets[part_id][1]);
             curr_model.move(offsets[part_id][0], offsets[part_id][1]);
+        }
+
+        if (param.is_tilted) {
+            printf("%s (%f, %f)\n", "Applying tilt on", tilts[part_id][0], tilts[part_id][1]);
+
+            float cor_x = 0.0f;
+            float cor_y = 0.0f;
+            float cor_z = (part.first + part.second - v_det) / static_cast<float>(v_det);
+
+            if (param.is_offset) {
+                cor_x = offsets[part_id][0];
+                cor_y = offsets[part_id][1];
+            }
+            
+            curr_model.rotate(tilts[part_id][0], tilts[part_id][1], 0.0f, cor_x, cor_y, cor_z);
         }
 
         projections[part_id] = cv::Mat_<float>(3, proj_mat_shape);

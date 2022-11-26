@@ -3,6 +3,7 @@
 
 
 #include <vector>
+#include <opencv2/opencv.hpp>
 #include "TomoP3DObject.hpp"
 
 
@@ -42,12 +43,16 @@ public:
 
     /**
      * \brief Rotates model on given angles
-     * Change each object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3)
+     * Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles
      * 
-     * \param[in] x X offset (in degrees)
-     * \param[in] y Y offset (in degrees)
+     * \param[in] ang_x X rotation (in degrees)
+     * \param[in] ang_y Y rotation (in degrees)
+     * \param[in] ang_z Z rotation (in degrees)
+     * \param[in] cor_x X center of rotation point (in [-1, 1])
+     * \param[in] cor_y Y center of rotation point (in [-1, 1])
+     * \param[in] cor_z Z center of rotation point (in [-1, 1])
      */
-    void rotate(float ang1, float ang2, float ang3);
+    void rotate(float ang_x, float ang_y, float ang_z, float cor_x, float cor_y, float cor_z);
 
     /**
      * \brief Builds model projections

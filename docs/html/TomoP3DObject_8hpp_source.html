@@ -76,63 +76,67 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;opencv2/opencv.hpp&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classTomoP3DObject.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classTomoP3DObject.html">TomoP3DObject</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classTomoP3DObject.html#a23e4f90688c7732821ee4c33edf682dc">TomoP3DObject</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classTomoP3DObject.html#a23e4f90688c7732821ee4c33edf682dc">TomoP3DObject</a>(<span class="keywordtype">char</span> *<span class="keywordtype">object</span>,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">float</span> c0,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">float</span> x0,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">float</span> y0,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">float</span> z0,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">float</span> a,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">float</span> b,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">float</span> c,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">float</span> psi_gr1,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">float</span> psi_gr2,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">float</span> psi_gr3);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classTomoP3DObject.html#a23e4f90688c7732821ee4c33edf682dc">TomoP3DObject</a>(<span class="keyword">const</span> <a class="code" href="classTomoP3DObject.html">TomoP3DObject</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classTomoP3DObject.html#ab3d73f39c6c67cacfbcb2237100512c8">move</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classTomoP3DObject.html#aa23db883a15f5b3a5fd17e8e7fd82fcc">rotate</a>(<span class="keywordtype">float</span> ang1, <span class="keywordtype">float</span> ang2, <span class="keywordtype">float</span> ang3);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classTomoP3DObject.html#a20a3dd657350c2a385c8c31922b6474a">sinogram</a>(<span class="keywordtype">float</span> *data, <span class="keywordtype">long</span> horiz_det, <span class="keywordtype">long</span> vert_det, <span class="keywordtype">long</span> z1, <span class="keywordtype">long</span> z2, <span class="keywordtype">long</span> size, std::vector&lt;float&gt;&amp; angles);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">// std::istream&amp; read_from(std::istream&amp; is);</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::ostream&amp; <a class="code" href="classTomoP3DObject.html#a069844d6f4b7bc44b3b5024e27377013">write_to</a>(std::ostream&amp; os) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    std::string object;  <span class="comment">// Analytical Model selection</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">float</span> c0;      <span class="comment">// intensity</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">float</span> x0;      <span class="comment">// x0 position</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">float</span> y0;      <span class="comment">// y0 position</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">float</span> z0;      <span class="comment">// z0 position</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">float</span> a;       <span class="comment">// a - size object</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">float</span> b;       <span class="comment">// b - size object</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">float</span> c;       <span class="comment">// c - size object</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">float</span> psi_gr1; <span class="comment">// rotation angle1</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">float</span> psi_gr2; <span class="comment">// rotation angle2</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">float</span> psi_gr3; <span class="comment">// rotation angle3</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">// std::istream&amp; operator&gt;&gt;(std::istream&amp; is, TomoP3DObject&amp; obj);</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classTomoP3DObject.html">TomoP3DObject</a>&amp; obj) noexcept;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif // TOMO_P_3D_OBJECT_HPP</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classTomoP3DObject.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classTomoP3DObject.html">TomoP3DObject</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classTomoP3DObject.html#a23e4f90688c7732821ee4c33edf682dc">TomoP3DObject</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classTomoP3DObject.html#a23e4f90688c7732821ee4c33edf682dc">TomoP3DObject</a>(<span class="keywordtype">char</span> *<span class="keywordtype">object</span>,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">float</span> c0,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">float</span> x0,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">float</span> y0,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">float</span> z0,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">float</span> a,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">float</span> b,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">float</span> c,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">float</span> psi_gr1,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">float</span> psi_gr2,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">float</span> psi_gr3);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classTomoP3DObject.html#a23e4f90688c7732821ee4c33edf682dc">TomoP3DObject</a>(<span class="keyword">const</span> <a class="code" href="classTomoP3DObject.html">TomoP3DObject</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classTomoP3DObject.html#a24cf0217d99cde033b3e4b60d5fe8a8e">move</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">float</span> z);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classTomoP3DObject.html#a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5">transform</a>(cv::Mat T);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classTomoP3DObject.html#a98a3a159aac7881a9d7cbdfb1ad82f3b">rotate</a>(<span class="keywordtype">float</span> ang_x, <span class="keywordtype">float</span> ang_y, <span class="keywordtype">float</span> ang_z);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classTomoP3DObject.html#a20a3dd657350c2a385c8c31922b6474a">sinogram</a>(<span class="keywordtype">float</span> *data, <span class="keywordtype">long</span> horiz_det, <span class="keywordtype">long</span> vert_det, <span class="keywordtype">long</span> z1, <span class="keywordtype">long</span> z2, <span class="keywordtype">long</span> size, std::vector&lt;float&gt;&amp; angles);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="comment">// std::istream&amp; read_from(std::istream&amp; is);</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    std::ostream&amp; <a class="code" href="classTomoP3DObject.html#a069844d6f4b7bc44b3b5024e27377013">write_to</a>(std::ostream&amp; os) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    std::string object;  <span class="comment">// Analytical Model selection</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">float</span> c0;      <span class="comment">// intensity</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordtype">float</span> x0;      <span class="comment">// x0 position</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">float</span> y0;      <span class="comment">// y0 position</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">float</span> z0;      <span class="comment">// z0 position</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">float</span> a;       <span class="comment">// a - size object</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">float</span> b;       <span class="comment">// b - size object</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">float</span> c;       <span class="comment">// c - size object</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">float</span> psi_gr1; <span class="comment">// rotation angle1</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">float</span> psi_gr2; <span class="comment">// rotation angle2</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">float</span> psi_gr3; <span class="comment">// rotation angle3</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;};</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">// std::istream&amp; operator&gt;&gt;(std::istream&amp; is, TomoP3DObject&amp; obj);</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classTomoP3DObject.html">TomoP3DObject</a>&amp; obj) noexcept;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#endif // TOMO_P_3D_OBJECT_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassTomoP3DObject_html"><div class="ttname"><a href="classTomoP3DObject.html">TomoP3DObject</a></div><div class="ttdoc">Representation of 3D geometric object.</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.hpp:27</div></div>
-<div class="ttc" id="aclassTomoP3DObject_html_a069844d6f4b7bc44b3b5024e27377013"><div class="ttname"><a href="classTomoP3DObject.html#a069844d6f4b7bc44b3b5024e27377013">TomoP3DObject::write_to</a></div><div class="ttdeci">std::ostream &amp; write_to(std::ostream &amp;os) const noexcept</div><div class="ttdoc">Writes object params to ostream.</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:58</div></div>
-<div class="ttc" id="aclassTomoP3DObject_html_aa23db883a15f5b3a5fd17e8e7fd82fcc"><div class="ttname"><a href="classTomoP3DObject.html#aa23db883a15f5b3a5fd17e8e7fd82fcc">TomoP3DObject::rotate</a></div><div class="ttdeci">void rotate(float ang1, float ang2, float ang3)</div><div class="ttdoc">Rotates object on given angles Change object rotation vector from (psi_gr1, psi_gr2,...</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:38</div></div>
-<div class="ttc" id="aclassTomoP3DObject_html_ab3d73f39c6c67cacfbcb2237100512c8"><div class="ttname"><a href="classTomoP3DObject.html#ab3d73f39c6c67cacfbcb2237100512c8">TomoP3DObject::move</a></div><div class="ttdeci">void move(float x, float y)</div><div class="ttdoc">Moves object on given offset Change object position vector from (x0, y0, z0) to (x0 + x,...</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:32</div></div>
-<div class="ttc" id="aclassTomoP3DObject_html_a20a3dd657350c2a385c8c31922b6474a"><div class="ttname"><a href="classTomoP3DObject.html#a20a3dd657350c2a385c8c31922b6474a">TomoP3DObject::sinogram</a></div><div class="ttdeci">void sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector&lt; float &gt; &amp;angles)</div><div class="ttdoc">Builds object projections Registrates projections of object part from z1 to z2 from specified angles ...</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:45</div></div>
+<div class="ttc" id="aclassTomoP3DObject_html"><div class="ttname"><a href="classTomoP3DObject.html">TomoP3DObject</a></div><div class="ttdoc">Representation of 3D geometric object.</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.hpp:28</div></div>
+<div class="ttc" id="aclassTomoP3DObject_html_a069844d6f4b7bc44b3b5024e27377013"><div class="ttname"><a href="classTomoP3DObject.html#a069844d6f4b7bc44b3b5024e27377013">TomoP3DObject::write_to</a></div><div class="ttdeci">std::ostream &amp; write_to(std::ostream &amp;os) const noexcept</div><div class="ttdoc">Writes object params to ostream.</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:68</div></div>
+<div class="ttc" id="aclassTomoP3DObject_html_a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5"><div class="ttname"><a href="classTomoP3DObject.html#a0eaf1fb3cd2406a5d8c6a6acc3a2b0d5">TomoP3DObject::transform</a></div><div class="ttdeci">void transform(cv::Mat T)</div><div class="ttdoc">Transforms object position using given matrix Change object position vector from (x,...</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:39</div></div>
+<div class="ttc" id="aclassTomoP3DObject_html_a24cf0217d99cde033b3e4b60d5fe8a8e"><div class="ttname"><a href="classTomoP3DObject.html#a24cf0217d99cde033b3e4b60d5fe8a8e">TomoP3DObject::move</a></div><div class="ttdeci">void move(float x, float y, float z)</div><div class="ttdoc">Moves object on given offset Change object position vector from (x0, y0, z0) to (x0 + x,...</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:32</div></div>
+<div class="ttc" id="aclassTomoP3DObject_html_a20a3dd657350c2a385c8c31922b6474a"><div class="ttname"><a href="classTomoP3DObject.html#a20a3dd657350c2a385c8c31922b6474a">TomoP3DObject::sinogram</a></div><div class="ttdeci">void sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector&lt; float &gt; &amp;angles)</div><div class="ttdoc">Builds object projections Registrates projections of object part from z1 to z2 from specified angles ...</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:55</div></div>
+<div class="ttc" id="aclassTomoP3DObject_html_a98a3a159aac7881a9d7cbdfb1ad82f3b"><div class="ttname"><a href="classTomoP3DObject.html#a98a3a159aac7881a9d7cbdfb1ad82f3b">TomoP3DObject::rotate</a></div><div class="ttdeci">void rotate(float ang_x, float ang_y, float ang_z)</div><div class="ttdoc">Rotates object on given angles Change object rotation vector from (psi_gr1, psi_gr2,...</div><div class="ttdef"><b>Definition:</b> TomoP3DObject.cpp:48</div></div>
 <div class="ttc" id="aclassTomoP3DObject_html_a23e4f90688c7732821ee4c33edf682dc"><div class="ttname"><a href="classTomoP3DObject.html#a23e4f90688c7732821ee4c33edf682dc">TomoP3DObject::TomoP3DObject</a></div><div class="ttdeci">TomoP3DObject()=default</div><div class="ttdoc">Constructs an empty object.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
