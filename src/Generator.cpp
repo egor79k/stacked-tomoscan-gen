@@ -1,6 +1,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
+#include <random>
 #include <string>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -123,13 +124,19 @@ void Generator::apply_noise() {
         return;
     }
 
+    const float mean = 10000;
+    std::mt19937 mrand(param.seed);
+    std::poisson_distribution<> noise(mean);
+
     printf("Applying noise\n");
 
     for (cv::Mat_<float>& part_projs : projections) {
-        int noise_size[] = {part_projs.size[0], part_projs.size[1], part_projs.size[2]};
-        cv::Mat_<float> noise(3, noise_size);
-        cv::randn(noise, 6, 1);
-        part_projs += noise;
+        float* data = reinterpret_cast<float*>(part_projs.data);
+
+        for (int i = 0; i < part_projs.size[0] * part_projs.size[1] * part_projs.size[2]; ++i) {
+            float n = (noise(mrand) - mean) * param.noise_amplitude;
+            data[i] += n;
+        }
     }
 }
 

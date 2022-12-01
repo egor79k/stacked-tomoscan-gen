@@ -42,7 +42,7 @@ public:
     // Distortion parameters
     int seed;
     bool is_noisy;
-    // noise_amplitude;
+    float noise_amplitude;
     bool is_offset;
     float max_offset;
     bool is_tilted;

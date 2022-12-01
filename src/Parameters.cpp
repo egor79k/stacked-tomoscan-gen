@@ -52,6 +52,7 @@ void Parameters::serialize(const std::unordered_map<std::string, std::string>& d
     // Distortion parameters
     seed = std::stoi(dict.at("seed"));
     is_noisy = (dict.at("is_noisy") == "1");
+    noise_amplitude = std::stof(dict.at("noise_amplitude"));
     is_offset = (dict.at("is_offset") == "1");
     max_offset = std::stof(dict.at("max_offset"));
     is_tilted = (dict.at("is_tilted") == "1");
