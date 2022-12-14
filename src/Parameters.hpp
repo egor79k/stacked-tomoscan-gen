@@ -47,6 +47,8 @@ public:
     float max_offset;
     bool is_tilted;
     float max_tilt;
+    bool is_intensity_vary;
+    float max_intensity_variation;
 
     // Output parameters
     std::string save_path;

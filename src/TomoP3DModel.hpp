@@ -55,6 +55,14 @@ public:
     void rotate(float ang_x, float ang_y, float ang_z, float cor_x, float cor_y, float cor_z);
 
     /**
+     * \brief Changes model intensity on given value
+     * Change each object intensity from c0 to c0 + c
+     * 
+     * \param[in] c intensity variation
+     */
+    void variate_intensity(float c);
+
+    /**
      * \brief Builds model projections
      * Registrates projections of model part from z1 to z2 from specified angles and writes it to data sequentially
      * 

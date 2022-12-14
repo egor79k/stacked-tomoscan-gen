@@ -57,6 +57,8 @@ void Parameters::serialize(const std::unordered_map<std::string, std::string>& d
     max_offset = std::stof(dict.at("max_offset"));
     is_tilted = (dict.at("is_tilted") == "1");
     max_tilt = std::stof(dict.at("max_tilt"));
+    is_intensity_vary = (dict.at("is_intensity_vary") == "1");
+    max_intensity_variation = std::stof(dict.at("max_intensity_variation"));
 
     // Output parameters
     save_path = config_dir + dict.at("save_path");

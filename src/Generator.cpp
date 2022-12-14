@@ -70,6 +70,12 @@ void Generator::build_tilts() {
 }
 
 
+void Generator::build_intensity_variations() {
+    intensity_variations = cv::Mat_<float>(partition.size(), 1);
+    cv::randu(intensity_variations, -param.max_intensity_variation, param.max_intensity_variation);
+}
+
+
 void Generator::build_projections() {
     int v_det = param.height;
     int h_det = param.width * std::sqrt(2);
@@ -84,6 +90,10 @@ void Generator::build_projections() {
 
     if (param.is_tilted) {
         build_tilts();
+    }
+
+    if (param.is_intensity_vary) {
+        build_intensity_variations();
     }
 
     for (int part_id = 0; part_id < partition.size(); ++ part_id) {
@@ -111,6 +121,11 @@ void Generator::build_projections() {
             }
             
             curr_model.rotate(tilts[part_id][0], tilts[part_id][1], 0.0f, cor_x, cor_y, cor_z);
+        }
+
+        if (param.is_intensity_vary) {
+            printf("%s %f\n", "Applying intensity variation on", intensity_variations[part_id][0]);
+            curr_model.variate_intensity(intensity_variations[part_id][0]);
         }
 
         projections[part_id] = cv::Mat_<float>(3, proj_mat_shape);

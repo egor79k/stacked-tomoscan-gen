@@ -63,6 +63,13 @@ void TomoP3DModel::rotate(float ang_x, float ang_y, float ang_z, float cor_x, fl
 }
 
 
+void TomoP3DModel::variate_intensity(float c) {
+    for (TomoP3DObject& object : objects) {
+        object.variate_intensity(c);
+    }
+}
+
+
 void TomoP3DModel::sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles) {
     for (TomoP3DObject& object : objects) {
         object.sinogram(data, horiz_det, vert_det, z1, z2, size, angles);

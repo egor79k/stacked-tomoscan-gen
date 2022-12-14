@@ -52,6 +52,11 @@ void TomoP3DObject::rotate(float ang_x, float ang_y, float ang_z) {
 }
 
 
+void TomoP3DObject::variate_intensity(float c) {
+    c0 += c;
+}
+
+
 void TomoP3DObject::sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles) {
     if (("gaussian" == object) || ("paraboloid" == object) || ("ellipsoid" == object)) {
         TomoP3DObjectSino_core(data, horiz_det, vert_det, z1, z2, size, angles.data(), angles.size(), &object[0], c0, y0, -z0, -x0, b, a, c, psi_gr3, psi_gr2,  psi_gr1, 0l);

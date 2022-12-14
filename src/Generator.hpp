@@ -26,6 +26,7 @@ private:
     void build_angles();
     void build_offsets();
     void build_tilts();
+    void build_intensity_variations();
     void build_projections();
     void apply_noise();
     void reconstruct();
@@ -36,6 +37,7 @@ private:
     std::vector<float> angles;
     cv::Mat_<float> offsets;
     cv::Mat_<float> tilts;
+    cv::Mat_<float> intensity_variations;
     std::vector<cv::Mat_<float>> projections;
 };
 

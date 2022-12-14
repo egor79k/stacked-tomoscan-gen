@@ -94,6 +94,14 @@ public:
     void rotate(float ang_x, float ang_y, float ang_z);
 
     /**
+     * \brief Changes object intensity on given value
+     * Change object intensity from c0 to c0 + c
+     * 
+     * \param[in] c intensity variation
+     */
+    void variate_intensity(float c);
+
+    /**
      * \brief Builds object projections
      * Registrates projections of object part from z1 to z2 from specified angles and writes it to data sequentially
      * 
