@@ -17,7 +17,7 @@ class Parameters {
 public:
 
     /**
-     * \brief Read parameters from specified config file
+     * \brief Read parameters from specified config file.
      * 
      * \param[in] file_name Configuration file path
      * \return true - success, false - error

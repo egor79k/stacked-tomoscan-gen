@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_5fto_23',['write_to',['../classTomoP3DModel.html#adcf1d142e07c041ce1c4b001466025f9',1,'TomoP3DModel::write_to()'],['../classTomoP3DObject.html#a069844d6f4b7bc44b3b5024e27377013',1,'TomoP3DObject::write_to()']]]
+  ['variate_5fintensity_24',['variate_intensity',['../classTomoP3DModel.html#aca4c5d22022796af7ea73cd90866019d',1,'TomoP3DModel::variate_intensity()'],['../classTomoP3DObject.html#af77b266d587b54ad6475a1e00fed043b',1,'TomoP3DObject::variate_intensity()']]]
 ];

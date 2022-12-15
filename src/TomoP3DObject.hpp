@@ -8,7 +8,7 @@
 
 
 /**
- * \brief Representation of 3D geometric object
+ * \brief Representation of 3D geometric object.
  * 
  * TomoP3DObject represents one of the following 3D geometric oblects:
  *   - gaussian
@@ -29,12 +29,12 @@ class TomoP3DObject {
 public:
 
     /**
-     * \brief Constructs an empty object
+     * \brief Constructs an empty object.
      */
     TomoP3DObject() = default;
 
     /**
-     * \brief Constructs an object from given parameters
+     * \brief Constructs an object from given parameters.
      * 
      * \param[in] object Geometric shape
      * \param[in] c0 Intensivity
@@ -61,12 +61,12 @@ public:
         float psi_gr3);
 
     /**
-     * \brief Constructs a copy of the given object
+     * \brief Constructs a copy of the given object.
      */
     TomoP3DObject(const TomoP3DObject&) = default;
 
     /**
-     * \brief Moves object on given offset
+     * \brief Moves object on given offset.
      * Change object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0)
      * 
      * \param[in] x X offset (in [-1, 1])
@@ -76,7 +76,7 @@ public:
     void move(float x, float y, float z);
 
     /**
-     * \brief Transforms object position using given matrix
+     * \brief Transforms object position using given matrix.
      * Change object position vector from (x, y, z) to T * (x, y, z)^T
      * 
      * \param[in] T transformation matrix
@@ -84,7 +84,7 @@ public:
     void transform(cv::Mat T);
 
     /**
-     * \brief Rotates object on given angles
+     * \brief Rotates object on given angles.
      * Change object rotation vector from (psi_gr1, psi_gr2, psi_gr3) to (psi_gr1 + ang1, psi_gr2 + ang2, psi_gr3 + ang3)
      * 
      * \param[in] ang_x X rotation (in degrees)
@@ -94,7 +94,7 @@ public:
     void rotate(float ang_x, float ang_y, float ang_z);
 
     /**
-     * \brief Changes object intensity on given value
+     * \brief Changes object intensity on given value.
      * Change object intensity from c0 to c0 + c
      * 
      * \param[in] c intensity variation
@@ -102,7 +102,7 @@ public:
     void variate_intensity(float c);
 
     /**
-     * \brief Builds object projections
+     * \brief Builds object projections.
      * Registrates projections of object part from z1 to z2 from specified angles and writes it to data sequentially
      * 
      * \param[out] data Target memory with size (part.second - part.first) * param.angles_num * h_det * sizeof(float) bytes
@@ -118,7 +118,7 @@ public:
     // std::istream& read_from(std::istream& is);
 
     /**
-     * \brief Writes object params to ostream
+     * \brief Writes object params to ostream.
      * 
      * \param[in] os Out stream where to write
      * \return Out stream

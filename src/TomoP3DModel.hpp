@@ -15,12 +15,12 @@ class TomoP3DModel {
 public:
 
     /**
-     * \brief Constructs an empty model
+     * \brief Constructs an empty model.
      */
     TomoP3DModel() = default;
 
     /**
-     * \brief Constructs a model from given parameters
+     * \brief Constructs a model from given parameters.
      * 
      * \param[in] file_name Phantom library path
      * \param[in] model_id Model identificator from library
@@ -28,12 +28,12 @@ public:
     TomoP3DModel(const char* file_name, const int model_id);
 
     /**
-     * \brief Constructs a copy of the given model
+     * \brief Constructs a copy of the given model.
      */
     TomoP3DModel(const TomoP3DModel&) = default;
 
     /**
-     * \brief Moves model on given offset
+     * \brief Moves model on given offset.
      * Change each object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0)
      * 
      * \param[in] x X offset (in [-1, 1])
@@ -42,7 +42,7 @@ public:
     void move(float x, float y);
 
     /**
-     * \brief Rotates model on given angles
+     * \brief Rotates model on given angles.
      * Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles
      * 
      * \param[in] ang_x X rotation (in degrees)
@@ -55,7 +55,7 @@ public:
     void rotate(float ang_x, float ang_y, float ang_z, float cor_x, float cor_y, float cor_z);
 
     /**
-     * \brief Changes model intensity on given value
+     * \brief Changes model intensity on given value.
      * Change each object intensity from c0 to c0 + c
      * 
      * \param[in] c intensity variation
@@ -63,7 +63,7 @@ public:
     void variate_intensity(float c);
 
     /**
-     * \brief Builds model projections
+     * \brief Builds model projections.
      * Registrates projections of model part from z1 to z2 from specified angles and writes it to data sequentially
      * 
      * \param[out] data Target memory with size (part.second - part.first) * param.angles_num * h_det * sizeof(float) bytes
@@ -77,7 +77,7 @@ public:
     void sinogram(float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector<float>& angles);
 
     /**
-     * \brief Reads model from library
+     * \brief Reads model from library.
      * Reads model from library, where models are described in format used in TomoPhantom
      * 
      * \param[in] file_name Phantom library path
@@ -89,7 +89,7 @@ public:
     // std::istream& read_from(std::istream& is);
 
     /**
-     * \brief Writes model params to ostream
+     * \brief Writes model params to ostream.
      * 
      * \param[in] os Out stream where to write
      * \return Out stream

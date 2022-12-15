@@ -15,7 +15,7 @@ class Generator {
 public:
 
     /**
-     * \brief Starts generation pipeline
+     * \brief Starts generation pipeline.
      * 
      * \param[in] config_file Configuration file path
      */

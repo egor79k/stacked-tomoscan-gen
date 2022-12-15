@@ -89,16 +89,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0bafca889d30913d3ce1a2ac07bfbb28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a copy of the given model. <br /></td></tr>
 <tr class="separator:a0bafca889d30913d3ce1a2ac07bfbb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7105e6d2880fcc0b51fa902454161028"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#a7105e6d2880fcc0b51fa902454161028">move</a> (float x, float y)</td></tr>
-<tr class="memdesc:a7105e6d2880fcc0b51fa902454161028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves model on given offset Change each object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0)  <a href="classTomoP3DModel.html#a7105e6d2880fcc0b51fa902454161028">More...</a><br /></td></tr>
+<tr class="memdesc:a7105e6d2880fcc0b51fa902454161028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves model on given offset. Change each object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0)  <a href="classTomoP3DModel.html#a7105e6d2880fcc0b51fa902454161028">More...</a><br /></td></tr>
 <tr class="separator:a7105e6d2880fcc0b51fa902454161028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f163af4e50a292aa3107fb63bab1b5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#a0f163af4e50a292aa3107fb63bab1b5e">rotate</a> (float ang_x, float ang_y, float ang_z, float cor_x, float cor_y, float cor_z)</td></tr>
-<tr class="memdesc:a0f163af4e50a292aa3107fb63bab1b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates model on given angles Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles.  <a href="classTomoP3DModel.html#a0f163af4e50a292aa3107fb63bab1b5e">More...</a><br /></td></tr>
+<tr class="memdesc:a0f163af4e50a292aa3107fb63bab1b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates model on given angles. Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles.  <a href="classTomoP3DModel.html#a0f163af4e50a292aa3107fb63bab1b5e">More...</a><br /></td></tr>
 <tr class="separator:a0f163af4e50a292aa3107fb63bab1b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca4c5d22022796af7ea73cd90866019d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#aca4c5d22022796af7ea73cd90866019d">variate_intensity</a> (float c)</td></tr>
+<tr class="memdesc:aca4c5d22022796af7ea73cd90866019d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes model intensity on given value. Change each object intensity from c0 to c0 + c.  <a href="classTomoP3DModel.html#aca4c5d22022796af7ea73cd90866019d">More...</a><br /></td></tr>
+<tr class="separator:aca4c5d22022796af7ea73cd90866019d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af44d52fe0890a173107b7467ce7aa371"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#af44d52fe0890a173107b7467ce7aa371">sinogram</a> (float *data, long horiz_det, long vert_det, long z1, long z2, long size, std::vector&lt; float &gt; &amp;angles)</td></tr>
-<tr class="memdesc:af44d52fe0890a173107b7467ce7aa371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds model projections Registrates projections of model part from z1 to z2 from specified angles and writes it to data sequentially.  <a href="classTomoP3DModel.html#af44d52fe0890a173107b7467ce7aa371">More...</a><br /></td></tr>
+<tr class="memdesc:af44d52fe0890a173107b7467ce7aa371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds model projections. Registrates projections of model part from z1 to z2 from specified angles and writes it to data sequentially.  <a href="classTomoP3DModel.html#af44d52fe0890a173107b7467ce7aa371">More...</a><br /></td></tr>
 <tr class="separator:af44d52fe0890a173107b7467ce7aa371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4d62b9969a1a1d5ba89de8b0d54064d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#af4d62b9969a1a1d5ba89de8b0d54064d">read_from_file</a> (const char *file_name, const int model_id)</td></tr>
-<tr class="memdesc:af4d62b9969a1a1d5ba89de8b0d54064d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads model from library Reads model from library, where models are described in format used in TomoPhantom.  <a href="classTomoP3DModel.html#af4d62b9969a1a1d5ba89de8b0d54064d">More...</a><br /></td></tr>
+<tr class="memdesc:af4d62b9969a1a1d5ba89de8b0d54064d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads model from library. Reads model from library, where models are described in format used in TomoPhantom.  <a href="classTomoP3DModel.html#af4d62b9969a1a1d5ba89de8b0d54064d">More...</a><br /></td></tr>
 <tr class="separator:af4d62b9969a1a1d5ba89de8b0d54064d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcf1d142e07c041ce1c4b001466025f9"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTomoP3DModel.html#adcf1d142e07c041ce1c4b001466025f9">write_to</a> (std::ostream &amp;os) const noexcept</td></tr>
 <tr class="memdesc:adcf1d142e07c041ce1c4b001466025f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes model params to ostream.  <a href="classTomoP3DModel.html#adcf1d142e07c041ce1c4b001466025f9">More...</a><br /></td></tr>
@@ -171,7 +174,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Moves model on given offset Change each object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0) </p>
+<p>Moves model on given offset. Change each object position vector from (x0, y0, z0) to (x0 + x, y0 + y, z0) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>X offset (in [-1, 1]) </td></tr>
@@ -208,7 +211,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reads model from library Reads model from library, where models are described in format used in TomoPhantom. </p>
+<p>Reads model from library. Reads model from library, where models are described in format used in TomoPhantom. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">file_name</td><td>Phantom library path </td></tr>
@@ -270,7 +273,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Rotates model on given angles Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles. </p>
+<p>Rotates model on given angles. Rotates model around (cor_x, cor_y, cor_z) point on (ang_x, ang_y, ang_z) Euler angles. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">ang_x</td><td>X rotation (in degrees) </td></tr>
@@ -341,7 +344,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Builds model projections Registrates projections of model part from z1 to z2 from specified angles and writes it to data sequentially. </p>
+<p>Builds model projections. Registrates projections of model part from z1 to z2 from specified angles and writes it to data sequentially. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">data</td><td>Target memory with size (part.second - part.first) * param.angles_num * h_det * sizeof(float) bytes </td></tr>
@@ -351,6 +354,32 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">z2</td><td>Upper bound of scanning </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Object size </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angles</td><td>Vector of angles of registration of projections </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aca4c5d22022796af7ea73cd90866019d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca4c5d22022796af7ea73cd90866019d">&#9670;&nbsp;</a></span>variate_intensity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TomoP3DModel::variate_intensity </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes model intensity on given value. Change each object intensity from c0 to c0 + c. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>intensity variation </td></tr>
   </table>
   </dd>
 </dl>
