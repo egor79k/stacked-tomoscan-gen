@@ -19,7 +19,7 @@ public:
     /**
      * \brief Read parameters from specified config file.
      * 
-     * \param[in] file_name Configuration file path
+     * \param[in] config_file Configuration file path
      * \return true - success, false - error
      */
     bool read_from_file(const char* config_file);
