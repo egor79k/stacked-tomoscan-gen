@@ -8,7 +8,7 @@ import cv2
 '''
 This script reconstructs parts of the whole object from partial projections, using ToMoBAR reconstruction tools
 Input:
-    <read_path> <obj_size> <width> <parts_count> <angles_count> <angles_step> <save_path>
+    <read_path> <obj_size> <width> <parts_count> <angles_count> <angles_step> <save_path> <partition> <offsets> <tilts> <intensity_variations>
     where:
         read_path    - path to projections dir
         obj_size     - size of object used in projections building
@@ -17,6 +17,10 @@ Input:
         angles_count - number of projection images (named 0.tiff, 1.tiff, ...) in each part dir
         angles_step  - step between adjacent projections
         save_path    - path to reconstructions save dir
+        partition    - list of (begin, end) id pairs of parts
+        offsets      - list of pairs of x and y offsets of parts
+        tilts        - list of pairs of x and y tilts of parts
+        intensity_variation - list of intensity deviations of parts
 Output:
     reconstructed part as a set of slices images at each of parts_count dirs at save_path
 '''
@@ -62,7 +66,14 @@ def save_reconstructions(rec, part_id: int):
         'width': len(rec[0, 0]),
         'format': '.tiff',
         'range_min': float(np.min(rec)),
-        'range_max': float(np.max(rec))
+        'range_max': float(np.max(rec)),
+        'part_begin': partition[part_id][0],
+        'part_end': partition[part_id][1],
+        'offset_x': offsets[part_id][0],
+        'offset_y': offsets[part_id][1],
+        'tilt_x': tilts[part_id][0],
+        'tilt_y': tilts[part_id][1],
+        'intensity_variation': intensity_variations[part_id]
     }
 
     with open(os.path.join(rec_save_path, 'info.json'), 'w') as fp:
@@ -70,9 +81,10 @@ def save_reconstructions(rec, part_id: int):
 
 
 if len(sys.argv) < 8:
-    print('Error: Not enougth args\nUsage: <read_path> <obj_size> <parts_count> <angles_count> <angles_step> <save_path>')
+    print('Error: Not enougth args\nUsage: <read_path> <obj_size> <parts_count> <angles_count> <angles_step> <save_path> <partition> <offsets> <tilts> <intensity_variations>')
     sys.exit()
 
+# Read parameters
 read_path = sys.argv[1]
 obj_size = int(sys.argv[2])
 width = int(sys.argv[3])
@@ -80,6 +92,14 @@ parts_num = int(sys.argv[4])
 angles_num = int(sys.argv[5])
 angles_step = float(sys.argv[6])
 save_path = sys.argv[7]
+arg_id = 8
+partition = [(int(sys.argv[i]), int(sys.argv[i + 1])) for i in range(arg_id, arg_id + parts_num * 2, 2)]
+arg_id += (parts_num * 2)
+offsets = [(float(sys.argv[i]), float(sys.argv[i + 1])) for i in range(arg_id, arg_id + parts_num * 2, 2)]
+arg_id += (parts_num * 2)
+tilts = [(float(sys.argv[i]), float(sys.argv[i + 1])) for i in range(arg_id, arg_id + parts_num * 2, 2)]
+arg_id += (parts_num * 2)
+intensity_variations = [float(sys.argv[i]) for i in range(arg_id, arg_id + parts_num)]
 
 angles = np.arange(0, angles_num * angles_step, angles_step)
 angles_rad = angles * (np.pi / 180.0)

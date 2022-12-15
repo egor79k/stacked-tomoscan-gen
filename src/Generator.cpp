@@ -190,6 +190,37 @@ void Generator::reconstruct() {
         std::to_string(param.angles_step) + " " +
         param.save_path;
 
+    for (int i = 0; i < param.parts_num; ++i) {
+        cmd += (" " + std::to_string(partition[i].first) +
+            " " + std::to_string(partition[i].second));
+    }
+
+    if (!param.is_offset) {
+        offsets = cv::Mat_<float>::zeros(partition.size(), 2);
+    }
+
+    for (int i = 0; i < param.parts_num; ++i) {
+        cmd += (" " + std::to_string(offsets[i][0]) +
+            " " + std::to_string(offsets[i][1]));
+    }
+
+    if (!param.is_tilted) {
+        tilts = cv::Mat_<float>::zeros(partition.size(), 2);
+    }
+
+    for (int i = 0; i < param.parts_num; ++i) {
+        cmd += (" " + std::to_string(tilts[i][0]) +
+            " " + std::to_string(tilts[i][1]));
+    }
+
+    if (!param.is_intensity_vary) {
+        intensity_variations = cv::Mat_<float>::zeros(partition.size(), 1);
+    }
+
+    for (int i = 0; i < param.parts_num; ++i) {
+        cmd += (" " + std::to_string(intensity_variations[i][0]));
+    }
+
     printf("Running reconstruction script\n");
     std::system(cmd.data());
 
